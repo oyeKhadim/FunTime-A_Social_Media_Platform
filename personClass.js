@@ -1,4 +1,4 @@
-class person{
+export class person{
     id;
     name;
     username;
