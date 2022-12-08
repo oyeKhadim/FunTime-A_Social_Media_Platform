@@ -1,4 +1,5 @@
 import { Data1 } from './DataLayer.js'
+import { person } from './personClass.js'
 let signup = document.getElementById('signup');
 signup.onclick = (() => {
     let user = document.getElementById('username').value;
@@ -8,7 +9,11 @@ signup.onclick = (() => {
         if (Data1.usernameValid(user)) {
             if (!Data1.checkUserExist(user)) {
                 alert('succesful')
-                Data1.persons[user] = pass;           // Adds it to the map
+                var per = new person();
+                per.password = pass;
+                per.username = user;
+                Data1.persons[user] = pass;           // Adds it to the map          //Make sure this is working and if it is not working make it happen
+                console.log(Data1.persons[user].password)
                 // open page
             }
             else {
