@@ -1,5 +1,4 @@
 class Data{
     persons={}
     posts={}
-
 }
