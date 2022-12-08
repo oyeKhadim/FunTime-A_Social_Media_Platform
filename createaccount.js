@@ -1,15 +1,15 @@
 import { Data1 } from './DataLayer.js'
-
+Data1.persons['2']=2;
 let signup = document.getElementById('signup');
 signup.onclick = (() => {
     let user = document.getElementById('username').value;
     let pass = document.getElementById('password').value;
     let repass = document.getElementById('repassword').value;
-    if (pass === repass) {
-        let D = new Data1();
-        if (!D.checkUserExist(user)) {
+    if (pass == repass) {
+        if (!Data1.checkUserExist(user)) {
             // open page
-            alert('user not exist')
+            alert('succesful')
+            // D.persons[user]=pass;
         }
         else {
             alert('User already Exists')
