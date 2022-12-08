@@ -6,9 +6,16 @@ export class Data1 {
             return true;
     }
     static checkUserExist(name) {
-        if (name in this.persons) {
-            return true;
+        for(let key in this.persons)
+        {
+            if(this.persons[key]==name)
+            {
+                return true;
+            }
         }
         return false;
+    }
+    static usernameValid(str) {
+        return !str.includes(' ');
     }
 }
