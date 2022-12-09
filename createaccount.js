@@ -25,23 +25,25 @@ signup.onclick = (() => {
     }
 })
 let showpassword = document.getElementById("showpassword")
+let showpass = document.getElementById("showrepassword")
 showpassword.onclick = () => {
     if (document.getElementById("password").type == 'text') {
         document.getElementById("password").type = "password";
+        document.getElementById("repassword").type = "password";
         showpassword.src = "./closedeye.png";
+        showpass.src = "./closedeye.png";
+
         return;
     }
     document.getElementById("password").type = "text";
     showpassword.src = "./openeye.png";
-
-}
-let showpass = document.getElementById("showrepassword")
-showpass.onclick = () => {
-    if (document.getElementById("repassword").type == 'text') {
-        document.getElementById("repassword").type = "password";
-        showpass.src = "./closedeye.png";
-        return;
-    }
     document.getElementById("repassword").type = "text";
     showpass.src = "./openeye.png";
+
 }
+// showpass.onclick = () => {
+//     if (document.getElementById("repassword").type == 'text') {
+//         return;
+//     }
+    
+// }
