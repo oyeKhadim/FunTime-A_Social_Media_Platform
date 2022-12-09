@@ -11,5 +11,8 @@ v.onclick = (() => {
         document.getElementById('username').value = '';
         document.getElementById('password').value = '';
         alert('No such User')
+
+        console.log(Data1.arr);
+        
     }
 })
