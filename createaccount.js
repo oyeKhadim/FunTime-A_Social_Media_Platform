@@ -41,9 +41,3 @@ showpassword.onclick = () => {
     showpass.src = "./openeye.png";
 
 }
-// showpass.onclick = () => {
-//     if (document.getElementById("repassword").type == 'text') {
-//         return;
-//     }
-    
-// }
