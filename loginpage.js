@@ -16,3 +16,11 @@ v.onclick = (() => {
         
     }
 })
+let showpassword=document.getElementById("showpassword")
+showpassword.onclick=()=>{
+    if(document.getElementById("password").type=='text'){
+        document.getElementById("password").type = "password";
+        return;
+    }
+    document.getElementById("password").type = "text";
+}
