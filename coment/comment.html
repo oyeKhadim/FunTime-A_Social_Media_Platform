@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+        }
+
+        .comment-section {
+            display: flex;
+            flex-direction: column;
+            width: 400px;
+            height: 100vh;
+            border: 3px solid red;
+        }
+
+        .person-comment {
+            border: 4px solid blue;
+            /* margin: 10px; */
+            display: flex;
+        }
+
+        .user-pic img {
+            height: 50px;
+            border-radius: 100%;
+        }
+
+        .comment-details h6 {
+            margin: 0 0 0 17px;
+        }
+
+        .comment-text {
+            border: .5px solid rgb(78, 79, 78);
+            border-radius: 20px;
+            width: auto;
+            margin-top: 0;
+            margin-left: 10px;
+            padding: 5px 10px 5px 10px;
+        }
+
+        .comment-reaction img {
+            margin: 5px 0 0 5px;
+            height: 40px;
+        }
+
+        .comment-like-count {
+            margin: 5px 0 0 5px;
+            font-size: 30px;
+        }
+    </style>
+</head>
+
+<body>
+    <button id="btn"> press</button>
+    <div id="comment-section" class="comment-section">
+        
+    </div>
+    <script>
+        let btn = document.getElementById('btn')
+        btn.onclick = (() => {
+            Add_Comment("https://scontent-cdg2-1.xx.fbcdn.net/v/t39.30808-6/319103240_1537576496757255_7219623275808714004_n.jpg?_nc_cat=107&ccb=1-7&_nc_sid=09cbfe&_nc_eui2=AeH1sVCZPNmx9CQbwTTotZ1tjEt6OE1Ho_eMS3o4TUej9_FXsIZPRbLojUHftmTVsBpIbtXBbyOA5QlhVGTgjOji&_nc_ohc=ILf1Yhn4a7sAX8v-J71&tn=YyKhjYWnP_AqOePT&_nc_ht=scontent-cdg2-1.xx&oh=00_AfCKe9wqd9_X_AIa18nbvqR9bd8DlR2l2S_yIsnoTAltKw&oe=6398C7B6", "Abdul Mateen", "This Post is nice", 0)
+        })
+        function Add_Comment(img, PersonName, text, count) {
+            let yt = `<div class="person-comment">
+            <div class="user-pic">
+                <img src=${img}
+                    alt="">
+            </div>
+            <div class="comment-details">
+                <h6 class="rt">${PersonName}</h6>
+                <div class="comment-text">${text}</div>
+                <!-- like goes here -->
+            </div>
+            <div class="comment-reaction">
+                <img src="/Pngs/heart-liked.png" alt="">
+            </div>
+            <div class="comment-like-count">
+                ${count}
+            </div>
+        </div>`
+            document.getElementById('comment-section').innerHTML += yt;
+        }
+
+    </script>
+</body>
+
+</html>
