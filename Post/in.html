@@ -7,26 +7,31 @@
     <title>Document</title>
     <link rel="stylesheet" href="css.css">
     </head>
+
     <body>
         <button id="btn">Press</button>
         <div class="main" id="main">
         </div>
-        
+
         <script>
             let btn = document.getElementById('btn');
             btn.onclick = (() => {
+                insertpost("https://scontent-cdg2-1.xx.fbcdn.net/v/t39.30808-6/319103240_1537576496757255_7219623275808714004_n.jpg?_nc_cat=107&ccb=1-7&_nc_sid=09cbfe&_nc_eui2=AeH1sVCZPNmx9CQbwTTotZ1tjEt6OE1Ho_eMS3o4TUej9_FXsIZPRbLojUHftmTVsBpIbtXBbyOA5QlhVGTgjOji&_nc_ohc=ILf1Yhn4a7sAX8v-J71&tn=YyKhjYWnP_AqOePT&_nc_ht=scontent-cdg2-1.xx&oh=00_AfCKe9wqd9_X_AIa18nbvqR9bd8DlR2l2S_yIsnoTAltKw&oe=6398C7B6" , "Abdul Mateen" , '11:45  29 Nov', "https://scontent-cdg2-1.xx.fbcdn.net/v/t39.30808-6/319103240_1537576496757255_7219623275808714004_n.jpg?_nc_cat=107&ccb=1-7&_nc_sid=09cbfe&_nc_eui2=AeH1sVCZPNmx9CQbwTTotZ1tjEt6OE1Ho_eMS3o4TUej9_FXsIZPRbLojUHftmTVsBpIbtXBbyOA5QlhVGTgjOji&_nc_ohc=ILf1Yhn4a7sAX8v-J71&tn=YyKhjYWnP_AqOePT&_nc_ht=scontent-cdg2-1.xx&oh=00_AfCKe9wqd9_X_AIa18nbvqR9bd8DlR2l2S_yIsnoTAltKw&oe=6398C7B6" )
+            })
+            function insertpost(dp,name,date,img) {
+
                 let train = `<div class="post">
         <div class="post-details">
-            <img src="https://scontent-cdg2-1.xx.fbcdn.net/v/t39.30808-6/319103240_1537576496757255_7219623275808714004_n.jpg?_nc_cat=107&ccb=1-7&_nc_sid=09cbfe&_nc_eui2=AeH1sVCZPNmx9CQbwTTotZ1tjEt6OE1Ho_eMS3o4TUej9_FXsIZPRbLojUHftmTVsBpIbtXBbyOA5QlhVGTgjOji&_nc_ohc=ILf1Yhn4a7sAX8v-J71&tn=YyKhjYWnP_AqOePT&_nc_ht=scontent-cdg2-1.xx&oh=00_AfCKe9wqd9_X_AIa18nbvqR9bd8DlR2l2S_yIsnoTAltKw&oe=6398C7B6"
+            <img src=${dp}
                 alt="">
             <div class="name-time">
-                <h4>Person Name</h4>
-                <p>Date and Time</p>
+                <h4>${name}</h4>
+                <p>${date}</p>
             </div>
         </div>
         <div class="post-data">
             <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Reiciendis, co nse ctetur.</p>
-            <img src="https://scontent-cdg2-1.xx.fbcdn.net/v/t39.30808-6/319103240_1537576496757255_7219623275808714004_n.jpg?_nc_cat=107&ccb=1-7&_nc_sid=09cbfe&_nc_eui2=AeH1sVCZPNmx9CQbwTTotZ1tjEt6OE1Ho_eMS3o4TUej9_FXsIZPRbLojUHftmTVsBpIbtXBbyOA5QlhVGTgjOji&_nc_ohc=ILf1Yhn4a7sAX8v-J71&tn=YyKhjYWnP_AqOePT&_nc_ht=scontent-cdg2-1.xx&oh=00_AfCKe9wqd9_X_AIa18nbvqR9bd8DlR2l2S_yIsnoTAltKw&oe=6398C7B6"
+            <img src=${img}
                 alt="">
 
         </div>
@@ -49,9 +54,8 @@
             </div>
         </div>
     </div>`
-
-                document.getElementById('main').innerHTML+=train
-            })
+                document.getElementById('main').innerHTML += train
+            }
         </script>
     </body>
 
