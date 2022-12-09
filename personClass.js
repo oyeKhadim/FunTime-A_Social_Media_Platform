@@ -5,7 +5,7 @@ export class person{
     password;
     email;
     bio;
-    friends={};
+    friends=new Map();
     posts;
     requests;
     notifications;
