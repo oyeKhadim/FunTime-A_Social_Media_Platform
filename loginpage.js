@@ -11,7 +11,7 @@ v.onclick = (() => {
         document.getElementById('username').value = '';
         document.getElementById('password').value = '';
         alert('No such User')
-
+        //when page refreshes or we swithch to another page all data lost
         console.log(Data1.arr);
         
     }
