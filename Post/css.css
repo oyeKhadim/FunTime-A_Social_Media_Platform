@@ -1,0 +1,121 @@
+        body {
+            width: 500px;
+            border: .5px solid black;
+            margin: 0;
+            padding: 0;
+            margin-left: 400px;
+        }
+        .post {
+            border: 1px solid rgb(0, 0, 0);
+            border-radius: 12px;
+            width: auto;
+            margin: 5px;
+
+        }
+
+        .post-details {
+            display: flex;
+            /* border: 1px solid blue; */
+            margin: 3px;
+        }
+
+        .post-details img {
+            height: 50px;
+            border-radius: 100%;
+        }
+
+        .name-time {
+            margin-left: 4px;
+            display: flex;
+            flex-flow: column;
+            margin-left: 10px;
+        }
+
+        .name-time h4 {
+            /* border: 1px solid red; */
+            font-family: sans-serif;
+            font-size: 15px;
+            margin: 5px 0px 0px 10px;
+        }
+
+        .name-time p {
+            /* border: 1px solid brown; */
+            font-family: sans-serif;
+            font-size: 10px;
+            margin: 3px 0px 0px 10px;
+        }
+
+        .post-data {
+            margin-top: 5px;
+        }
+
+        .post-data p {
+            margin: 0px 5px 5px 5px;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            font-size: 13px;
+        }
+
+        .post-data img {
+            width: 100%;
+        }
+
+        .reaction-section {
+            margin-bottom: 4px;
+        }
+
+        .reaction-section-details {
+            display: flex;
+            width: auto;
+            border-radius: 8px;
+            border: 1px solid rgb(153, 153, 153);
+            padding: 3px;
+            margin-left: 5px;
+            margin-right: 5px;
+        }
+
+        .reaction-option {
+            display: flex;
+        }
+
+        .reaction-section-details p {
+            margin: 0 10px 0 0;
+        }
+
+        .love-reaction {
+            display: flex;
+            width: 50%;
+            border: 1px solid rgb(153, 153, 153);
+            border-radius: 8px;
+            margin: 3px 5px 0px 5px;
+        }
+
+        .love-reaction img {
+            margin-top: 3px;
+            margin-left: 10px;
+            height: 30px;
+        }
+
+        .love-reaction p {
+            margin: 7px 0 0 10px;
+            font-size: 20px;
+        }
+
+        .comment-section {
+            display: flex;
+            width: 50%;
+            margin: 3px 5px 0px 5px;
+            border-radius: 8px;
+
+            border: 1px solid rgb(153, 153, 153);
+        }
+
+        .comment-section img {
+            margin-top: 3px;
+            margin-left: 10px;
+            height: 30px;
+        }
+
+        .comment-section p {
+            margin: 7px 0 0 10px;
+            font-size: 20px;
+        }
