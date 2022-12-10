@@ -31,6 +31,15 @@
                 cursor: pointer;
             }
 
+            .font {
+                font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+
+            }
+
+            .bold {
+                font-weight: bold;
+            }
+
             .card {
                 width: 20vw;
                 background-color: rgb(203, 225, 252);
@@ -57,7 +66,9 @@
                 border-radius: 10px;
                 border: 2px solid var(--main-color);
                 font-size: large;
-                font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+
+                font-family: 'Calibri','Gill Sans', 'Gill Sans MT',  'Trebuchet MS', sans-serif;
+
             }
 
             .option {
@@ -98,15 +109,15 @@
 
     <body>
         <div class="main">
-            <div class="card">
+            <div class="card font bold">
                 <h1 class="header">FunTime</h1>
                 <input id="username" type="text" class="input" placeholder="Username ">
                 <div class="pass">
                     <input id="password" type="password" class="input" placeholder="Password ">
-                    <img src="closedeye.png" id="showpassword"class="pointer"  >
+                    <img src="../Pngs/closedeye.png" id="showpassword" class="pointer">
                 </div>
                 <div class="option">
-                    <button class="btn" id="signinbtn">Sign In</button>
+                    <button class="btn font" id="signinbtn">Sign In</button>
                 </div>
                 <a class="createacc" href="create_account.html">
                     <p class="createacc">Create Account</p>

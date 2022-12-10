@@ -1,117 +1,130 @@
 <!DOCTYPE html>
 <html lang="en">
 
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>FunTime</title>
-    <style>
-        :root {
-            --main-color: blue;
-        }
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>FunTime</title>
+        <style>
+            :root {
+                --main-color: blue;
+            }
 
-        body {
-            background-color: rgb(221, 235, 252);
-        }
+            body {
+                background-color: rgb(221, 235, 252);
+            }
 
-        .main {
-            margin: auto auto;
-            height: 90vh;
-            width: 100vw;
-            /* border: 3px solid red; */
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
+            .font {
+                font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
 
-        .card {
-            width: 20vw;
-            background-color: rgb(203, 225, 252);
-            border: .5px solid rgb(90, 90, 90);
-            padding: 10px 10px 10px 0px;
-            justify-content: center;
-            border-radius: 15px;
-        }
+            }
 
-        .header {
-            color: var(--main-color);
-            margin-top: 3vh;
-            margin-left: 3vh;
-            width: 100%;
-            display: block;
-        }
+            .bold {
+                font-weight: bold;
+            }
 
-        .input {
-            display: block;
-            margin: 3px 0px 5% 5%;
-            width: 85%;
-            height: 10%;
-            padding: 5px 5px 0px 10px;
-            border-radius: 10px;
-            border: 2px solid var(--main-color);
-            font-size: large;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-        }
+            .main {
+                margin: auto auto;
+                height: 90vh;
+                width: 100vw;
+                /* border: 3px solid red; */
+                display: flex;
+                align-items: center;
+                justify-content: center;
+            }
 
-        .option {
-            display: flex;
-            justify-content: center;
-        }
+            .card {
+                width: 20vw;
+                background-color: rgb(203, 225, 252);
+                border: .5px solid rgb(90, 90, 90);
+                padding: 10px 10px 10px 0px;
+                justify-content: center;
+                border-radius: 15px;
+            }
 
-        .btn {
-            height: 8vh;
-            width: 70%;
-            margin: 0px 0px;
-            background-color: rgb(17, 115, 213);
-            color: white;
-            border-radius: 40px;
-            border: none;
-            font-size: large;
-        }
+            .header {
+                color: var(--main-color);
+                margin-top: 3vh;
+                margin-left: 3vh;
+                width: 100%;
+                display: block;
+            }
 
-        .btn:hover,
-        .btn:visited {
-            background-color: rgb(6, 97, 189);
+            .input {
+                display: block;
+                margin: 3px 0px 5% 5%;
+                width: 85%;
+                height: 10%;
+                padding: 5px 5px 0px 10px;
+                border-radius: 10px;
+                border: 2px solid var(--main-color);
+                font-size: large;
+                font-family:  'Calibri','Gill Sans', 'Gill Sans MT', 'Trebuchet MS', sans-serif;
+            }
 
-        }
+            .option {
+                display: flex;
+                justify-content: center;
+            }
 
-        .login {
-            margin-left: 5px;
-        }
+            .btn {
+                height: 8vh;
+                width: 70%;
+                margin: 0px 0px;
+                background-color: rgb(17, 115, 213);
+                color: white;
+                border-radius: 40px;
+                border: none;
+                font-size: large;
+            }
 
-        .pass {
-            display: flex;
-        }
+            .pointer {
+                cursor: pointer;
+            }
 
-        .pass img {
-            height: 30px;
-        }
-    </style>
-</head>
+            .btn:hover,
+            .btn:visited {
+                background-color: rgb(6, 97, 189);
 
-<body>
-    <div class="main">
-        <div class="card">
-            <h1 class="header">FunTime</h1>
-            <input id="username" type="text" class="input" placeholder="Choose a Username ">
-            <div class="pass">
-                <input id="password" type="password" class="input" placeholder="Password ">
-                <img src="closedeye.png" id="showpassword" class="pointer">
+            }
+
+            .login {
+                margin-left: 5px;
+            }
+
+            .pass {
+                display: flex;
+            }
+
+            .pass img {
+                height: 30px;
+            }
+        </style>
+    </head>
+
+    <body>
+        <div class="main">
+            <div class="card font bold">
+                <h1 class="header">FunTime</h1>
+                <input id="username" type="text" class="input" placeholder="Choose a Username ">
+                <div class="pass">
+                    <input id="password" type="password" class="input" placeholder="Password ">
+                    <img src="../Pngs/closedeye.png" id="showpassword" class="pointer">
+                </div>
+                <div class="pass">
+                    <input id="repassword" type="password" class="input" placeholder="Confirm Password ">
+                </div>
+                <div class="option">
+                    <button id="signup" class="btn">Sign UP</button>
+                </div>
+                <a class="login" href="login_page.html">
+                    <p class="login">Already have a Account</p>
+                </a>
+
             </div>
-            <div class="pass">
-                <input id="repassword" type="password" class="input" placeholder="Confirm Password ">
-            </div>
-            <div class="option">
-                <button id="signup" class="btn">Sign UP</button>
-            </div>
-            <a class="login" href="login_page.html">
-                <p class="login">Already have a Account</p>
-            </a>
-
         </div>
-    </div>
-    <script type="module" src="createaccount.js"></script>
-</body>
+        <script type="module" src="createaccount.js"></script>
+    </body>
 
 </html>
