@@ -6,101 +6,7 @@
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>FunTime</title>
-        <style>
-            :root {
-                --main-color: blue;
-            }
-
-            body {
-                background-color: rgb(221, 235, 252);
-            }
-
-            .font {
-                font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
-
-            }
-
-            .bold {
-                font-weight: bold;
-            }
-
-            .main {
-                margin: auto auto;
-                height: 90vh;
-                width: 100vw;
-                /* border: 3px solid red; */
-                display: flex;
-                align-items: center;
-                justify-content: center;
-            }
-
-            .card {
-                width: 20vw;
-                background-color: rgb(203, 225, 252);
-                border: .5px solid rgb(90, 90, 90);
-                padding: 10px 10px 10px 0px;
-                justify-content: center;
-                border-radius: 15px;
-            }
-
-            .header {
-                color: var(--main-color);
-                margin-top: 3vh;
-                margin-left: 3vh;
-                width: 100%;
-                display: block;
-            }
-
-            .input {
-                display: block;
-                margin: 3px 0px 5% 5%;
-                width: 85%;
-                height: 10%;
-                padding: 5px 5px 0px 10px;
-                border-radius: 10px;
-                border: 2px solid var(--main-color);
-                font-size: large;
-                font-family:  'Calibri','Gill Sans', 'Gill Sans MT', 'Trebuchet MS', sans-serif;
-            }
-
-            .option {
-                display: flex;
-                justify-content: center;
-            }
-
-            .btn {
-                height: 8vh;
-                width: 70%;
-                margin: 0px 0px;
-                background-color: rgb(17, 115, 213);
-                color: white;
-                border-radius: 40px;
-                border: none;
-                font-size: large;
-            }
-
-            .pointer {
-                cursor: pointer;
-            }
-
-            .btn:hover,
-            .btn:visited {
-                background-color: rgb(6, 97, 189);
-
-            }
-
-            .login {
-                margin-left: 5px;
-            }
-
-            .pass {
-                display: flex;
-            }
-
-            .pass img {
-                height: 30px;
-            }
-        </style>
+        <link rel="stylesheet" href="/CSS/create-account.css">
     </head>
 
     <body>
@@ -116,12 +22,11 @@
                     <input id="repassword" type="password" class="input" placeholder="Confirm Password ">
                 </div>
                 <div class="option">
-                    <button id="signup" class="btn">Sign UP</button>
+                    <button id="signup" class="btn btn-css">Sign UP</button>
                 </div>
                 <a class="login" href="login_page.html">
                     <p class="login">Already have a Account</p>
                 </a>
-
             </div>
         </div>
         <script type="module" src="createaccount.js"></script>
