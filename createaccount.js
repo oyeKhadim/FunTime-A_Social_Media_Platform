@@ -73,8 +73,8 @@ const db = getDatabase();
 let signup = document.getElementById("signup");
 signup.addEventListener("click", insertData);
 function insertData() {
-	const dbref = ref(db);
 	let user = document.getElementById("username").value;
+	const dbref = ref(db);
 	let flag = true;
 	get(child(dbref, "Usernames/" + user)).then((snapshot) => {
 		if (!snapshot.exists()) {
@@ -99,7 +99,19 @@ function insertData() {
 						.catch((error) => {
 							alert("Error: " + error);
 						});
-					// open page
+						set(ref(db, "loggedInuser/" ), {
+							username: username.value,
+						})
+							.then(() => {
+								alert("Data stored suxxessfully");
+							})
+							.catch((error) => {
+								alert("Error: " + error);
+							});
+						// open page
+						setTimeout(() => {
+							location.href = "../Pages/User-info.html";
+						}, 1000);
 				}
 			} else {
 				alert(
