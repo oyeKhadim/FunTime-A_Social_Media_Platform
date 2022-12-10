@@ -77,20 +77,16 @@ signup.addEventListener("click", insertData);
 function insertData() {
 	const dbref = ref(db);
 	let user = document.getElementById("username").value;
-    let flag=true;
+	let flag = true;
 	get(child(dbref, "Usernames/" + user)).then((snapshot) => {
-		if (snapshot.exists()) {
-			console.log("true");
-			
-		} else {
-			console.log("false");
-			flag= false;
+		if (!snapshot.exists()) {
+			flag = false;
 		}
 	});
 	let pass = document.getElementById("password").value;
 	let repass = document.getElementById("repassword").value;
-	console.log("function callled");
-    setTimeout(()=>{if (pass == repass) {
+	setTimeout(() => {
+		if (pass == repass) {
 			if (Data1.usernameValid(user)) {
 				if (flag) {
 					alert("Username already Taken.");
@@ -108,12 +104,14 @@ function insertData() {
 					// open page
 				}
 			} else {
-				alert("Username is not valid. There must be no spaces.");
+				alert(
+					"Enter a Valid Username containing atleast 5 cahracters and With No Spaces."
+				);
 			}
 		} else {
 			alert("Password does not match.");
-		}},1000)
-	
+		}
+	}, 1000);
 }
 
 // <-------------------------------------------Linking Ends Here------------------------------------------>

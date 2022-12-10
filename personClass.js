@@ -1,4 +1,5 @@
 export class person {
+	//<-------------------------------------Constructor And Getter/Setters------------------------------------>
 	constructor(
 		name,
 		username,
@@ -11,7 +12,8 @@ export class person {
 		showFriendPrivacy,
 		friends,
 		notifications,
-		picture
+		picture,
+		isVerfied
 	) {
 		this._name = name;
 		this._username = username;
@@ -25,6 +27,7 @@ export class person {
 		this._friends = friends;
 		this._notifications = notifications;
 		this._picture = picture;
+		this._isVerfied = isVerfied;
 	}
 	set name(newname) {
 		this._name = newname;
@@ -62,6 +65,9 @@ export class person {
 	set picture(newpicture) {
 		this._picture = newpicture;
 	}
+	set isVerfied(verfied) {
+		this._isVerfied = verfied;
+	}
 	get name() {
 		return this._name;
 	}
@@ -98,4 +104,12 @@ export class person {
 	get picture() {
 		return this._picture;
 	}
+	get isVerfied() {
+		return this._isVerfied;
+	}
+	// <-------------------------------------------------Functions And Implementations--------------------------------->
+
+
+
+
 }
