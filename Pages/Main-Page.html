@@ -7,47 +7,138 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css">
+    <style>
+        #whole-screen {
+            display: flex;
+            margin-top: 5px;
+        }
 
+        #div-setting {
+            position: static;
+            border: 1px solid grey;
+            border-radius: 10px;
+            width: 25%;
+            margin: 0 5px;
+            height: 100vh;
+        }
+
+        .setting-card {
+            margin: 3px 5px;
+            border: 2px solid #00afda;
+            background-color: white;
+            border-radius: 100px;
+            padding: 8px 10px;
+        }
+        .setting-card:hover{
+            background-color: #b4eefd;
+            border: 2px solid #b4eefd;
+
+        }
+        .no-link{
+            color: black;
+            background-color: transparent;
+            text-decoration: none;
+            text-align: center;
+        }
+
+        #view-profile {
+            display: flex;
+            margin: 5px;
+        }
+
+        #view-profile img {
+            height: 40px;
+            margin: 2px 3px;
+        }
+
+        #view-profile h6 {
+            margin: 9px 20px;
+        }
+
+
+
+        #main-timeline {
+            margin: 0 3px;
+            width: 50%;
+            border: 1px solid grey;
+            border-radius: 10px;
+        }
+
+        #extra-features {
+            margin: 0 3px;
+            border: 1px solid grey;
+            border-radius: 10px;
+            width: 25%;
+        }
+    </style>
 </head>
 
 <body>
-        <nav class="navbar navbar-expand-lg " style="background-color: #00afda;" >
-            <div class="container-fluid">
-                <a class="navbar-brand fw-bold" href="#">FunTime</a>
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarScroll"
-                    aria-controls="navbarScroll" aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-                <div class="collapse navbar-collapse" id="navbarScroll">
-                    <ul class="navbar-nav me-auto my-2 my-lg-0 navbar-nav-scroll" style="--bs-scroll-height: 100px;">
-                        <li class="nav-item">
-                            <a class="nav-link active" aria-current="page" href="#">Home</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="#">Friend Requests</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="#">Notifications</a>
-                        </li>
-                        <li class="nav-item">
-                            <!-- <a class="nav-link disabled">Link</a> -->
-                        </li>
-                    </ul>
-                    <form class="d-flex" role="search">
-                        <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
-                        <button class="btn btn-outline-success" type="submit">Search</button>
-                    </form>
-                </div>
+    <nav class="navbar navbar-expand-lg " style="background-color: #00afda;">
+        <div class="container-fluid">
+            <a class="navbar-brand fw-bold" href="#">FunTime</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarScroll"
+                aria-controls="navbarScroll" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarScroll">
+                <ul class="navbar-nav me-auto my-2 my-lg-0 navbar-nav-scroll" style="--bs-scroll-height: 100px;">
+                    <li class="nav-item">
+                        <a class="nav-link active" aria-current="page" href="#">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Friend Requests</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Notifications</a>
+                    </li>
+                    <li class="nav-item">
+                        <!-- <a class="nav-link disabled">Link</a> -->
+                    </li>
+                </ul>
+                <form class="d-flex" role="search">
+                    <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+                    <button class="btn btn-outline-success" type="submit">Search</button>
+                </form>
             </div>
-        </nav>
-        <div class="whole-screen">
-            <div id="div-setting">
+        </div>
+    </nav>
+    <div id="whole-screen">
+        <div id="div-setting">
+            <a href="#" class="no-link">
                 <div id="view-profile">
-                    <img src="" alt="">
+                    <img src="/Pngs/heart-liked.png" alt="">
+                    <h6 style="text-align: center;">View Profile</h6>
                 </div>
-            </div>
+            </a>
+            <a href="#" class="no-link">
+                <div id="friend-requests" class="setting-card">
+                    <h6>View Friends</h6>
+                </div>
+            </a>
+            <a href="#" class="no-link">
+                <div id="friend-requests" class="setting-card">
+                    <h6>View Friend Requests</h6>
+                </div>
+            </a>
+            <a href="#" class="no-link">
+                <div id="friend-requests" class="setting-card">
+                    <h6>Chnage Settings</h6>
+                </div>
+            </a>
+            <a href="#" class="no-link">
+                <div id="friend-requests" class="setting-card">
+                    <h6>Chnage Settings</h6>
+                </div>
+            </a>
+        </div>
+        <div id="main-timeline">
 
         </div>
+        <div id="extra-features">
+
+        </div>
+    </div>
 
 
 
