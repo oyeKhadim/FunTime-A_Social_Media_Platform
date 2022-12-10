@@ -1,4 +1,3 @@
-import { person } from './personClass.js'
 export class Data1 {
 	static persons = new Map();
 	static posts = new Map();

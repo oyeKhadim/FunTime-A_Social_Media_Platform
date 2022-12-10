@@ -1,5 +1,4 @@
 import { Data1 } from "./DataLayer.js";
-import { person } from "./personClass.js";
 // let signup = document.getElementById('signup');
 // signup.onclick = (() => {
 //     let user = document.getElementById('username').value;
@@ -25,7 +24,6 @@ import { person } from "./personClass.js";
 //     }
 // })
 let showpassword = document.getElementById("showpassword");
-let showpass = document.getElementById("showrepassword");
 showpassword.onclick = () => {
 	if (document.getElementById("password").type == "text") {
 		document.getElementById("password").type = "password";
