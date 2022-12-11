@@ -101,6 +101,7 @@ function insertData() {
 						});
 						set(ref(db, "loggedInuser/" ), {
 							username: username.value,
+							password:password.value
 						})
 							.then(() => {
 								alert("Data stored suxxessfully");

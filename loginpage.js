@@ -53,6 +53,17 @@ function SelectData() {
 		if (snapshot.exists()) {
 			if(username.value == snapshot.val().username&&
 			password.value == snapshot.val().password){
+				set(ref(db, "loggedInuser/"), {
+					username: username.value,
+					password: password.value,
+				})
+					.then(() => {
+						alert("Loggend in user Data stored suxxessfully");
+						location.href="../pages/main-page.html"
+					})
+					.catch((error) => {
+						alert("Error: " + error);
+					});
                 alert('Valid User');
             }
             else{
