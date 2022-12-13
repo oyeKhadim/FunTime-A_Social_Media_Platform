@@ -1,4 +1,4 @@
-import { Data1 } from "./DataLayer.js";
+import { Data1 } from "../DataLayer.js";
 // let signup = document.getElementById('signup');
 // signup.onclick = (() => {
 //     let user = document.getElementById('username').value;

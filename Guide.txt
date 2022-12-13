@@ -1,0 +1,12 @@
+Rules to maintain
+
+
+1-   Save the files in the crosponding folder
+2-   Do not change any properties in css files
+3-   
+
+
+
+Todo
+if we can remove the datalayer.js please remove it
+move all the files in crossponding folder 
