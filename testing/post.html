@@ -1,26 +1,28 @@
 <!DOCTYPE html>
 <html lang="en">
-    <>
-        <meta charset="UTF-8">
-        <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Document</title>
-        <link rel="stylesheet" href="/CSS/post.css">
-        </head>
+<head>
 
-        <body>
-            <button id="btn">Press</button>
-            <div class="main" id="main">
-            </div>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="/CSS/post.css">
+    
+</head>
 
-            <script>
-                let btn = document.getElementById('btn');
-                btn.onclick = (() => {
-                    insertpost("https://pbs.twimg.com/profile_images/1021772856567517189/54w9XjA4_400x400.jpg", "FunTime", '06:37 AM , 2 Dec', "https://thumbs.dreamstime.com/b/fun-time-concept-toy-objects-child-education-yellow-background-142226373.jpg", "Coming Soon...", 37, 2, 58)
-                })
-                function insertpost(dp, name, date, img, text, likes, dislikes, comments) {
+<body>
+    <button id="btn">Press</button>
+    <div class="main" id="main">
+    </div>
 
-                    let train = `<div class="post">
+    <script>
+        let btn = document.getElementById('btn');
+        btn.onclick = (() => {
+            insertpost("https://pbs.twimg.com/profile_images/1021772856567517189/54w9XjA4_400x400.jpg", "FunTime", '06:37 AM , 2 Dec', "https://thumbs.dreamstime.com/b/fun-time-concept-toy-objects-child-education-yellow-background-142226373.jpg", "Coming Soon...", 37, 2, 58)
+        })
+        function insertpost(dp, name, date, img, text, likes, dislikes, comments) {
+
+            let train = `<div class="post">
         <div class="post-details">
             <img src=${dp}
                 alt="">
@@ -54,9 +56,9 @@
             </div>
         </div>
     </div>`
-                    document.getElementById('main').innerHTML += train
-                }
-            </script>
-        </body>
+            document.getElementById('main').innerHTML += train
+        }
+    </script>
+</body>
 
 </html>
