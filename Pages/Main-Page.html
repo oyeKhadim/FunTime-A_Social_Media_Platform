@@ -166,7 +166,7 @@
             <textarea name="Caption" id="caption-area" cols=65% rows=auto placeholder="Add Caption"></textarea>
             <p>Drop Image</p>
             <input id="take-image" type="file" accept=".jpg,.png,.heic" onchange="change_newimage()" />
-            <img id="new-post-img" src="" alt="">
+            <img id="new-post-img" src="#" alt="">
             <!-- yahan par is ko update karna hai image show nahi ho rahi -->
             <button id="post-btn" class="setting-card" style="margin-top: 5px;"
                 onclick="show_newpost_popup()">Cancel</button>
@@ -218,11 +218,6 @@
 
 
         <script>
-            // show_newpost_popup()
-            // change_newimage()
-
-
-
             function show_newpost_popup() {
                 let btn = document.getElementById('new-post-popup');
                 btn.classList.toggle('show-newpost-popup');
@@ -230,10 +225,10 @@
 
             function change_newimage() {
                 var imge = document.getElementById('new-post-img');
-                imge.classList.add('image-details');
-                var file = document.getElementById('take-image')['files'][0]
+                // imge.classList.add('image-details');
+                // var file = document.getElementById('take-image')['files'][0]
                 imge.src = '/Pngs/heart-unlike.png';
-                document.getElementById('new-post-popup').append(imge);
+                document.getElementById('new-post-img')= imge;
             }
 
             // let btn = document.getElementById('btn');
