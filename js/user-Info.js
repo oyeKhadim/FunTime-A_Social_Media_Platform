@@ -150,12 +150,16 @@ function insertDetails() {
 			addFriendPrivacy: false,
 			showFriendPrivacy: false,
 			isVerified: false,
+			
 		})
 			.then(() => {
 				alert("Details stored suxxessfully");
 			})
 			.catch((error) => {
 				alert("Error: " + error);
+			});
+			set(ref(db, "PostCount/" + username), {
+				postCount: 0,
 			});
 		setTimeout(() => {
 			location.href = "main-page.html";

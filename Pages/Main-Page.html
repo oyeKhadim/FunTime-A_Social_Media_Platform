@@ -163,14 +163,15 @@
         <!-- Pop up Menu -->
         <div id="new-post-popup" class="popup">
             <h3>Create Post</h3>
-            <textarea name="Caption" id="caption-area" cols=65% rows=auto placeholder="Add Caption"></textarea>
+            <textarea name="Caption" id="caption-area" cols=auto rows=auto placeholder="Add Caption"></textarea>
             <p>Drop Image</p>
-            <input id="take-image" type="file" accept=".jpg,.png,.heic" onchange="change_newimage()" />
+            <input id="img-input" type="file" accept=".jpg,.png,.heic" />
+            <div id="root"></div>
             <img id="new-post-img" src="#" alt="">
             <!-- yahan par is ko update karna hai image show nahi ho rahi -->
-            <button id="post-btn" class="setting-card" style="margin-top: 5px;"
-                onclick="show_newpost_popup()">Cancel</button>
-            <button id="post-btn" class="setting-card" style="margin-top: 5px;">Post</button>
+            <button id="cancle_btn" class="setting-card" style="margin-top: 5px;"
+                >Cancel</button>
+            <button id="post_btn" class="setting-card" style="margin-top: 5px;">Post</button>
         </div>
 
 
@@ -210,70 +211,18 @@
                 <img id="profile_pic"
                     src="https://uxwing.com/wp-content/themes/uxwing/download/peoples-avatars/no-profile-picture-icon.png"
                     alt="">
-                <button id="btn" class="setting-card" onclick="show_newpost_popup()">Create Post</button>
+                <button id="createPost_btn" class="setting-card">Create Post</button>
             </div>
+
+            <!-- IMPORTANT NOTE -->
+            <!-- center this div in middle jaha hm chahty hn k posts show hon -->
+            <div id="posts_section"></div>
         </div>
 
 
 
 
-        <script>
-            function show_newpost_popup() {
-                let btn = document.getElementById('new-post-popup');
-                btn.classList.toggle('show-newpost-popup');
-            }
-
-            function change_newimage() {
-                var imge = document.getElementById('new-post-img');
-                // imge.classList.add('image-details');
-                // var file = document.getElementById('take-image')['files'][0]
-                imge.src = '/Pngs/heart-unlike.png';
-                document.getElementById('new-post-img')= imge;
-            }
-
-            // let btn = document.getElementById('btn');
-            // btn.onclick = (() => {
-            //     insertpost("https://pbs.twimg.com/profile_images/1021772856567517189/54w9XjA4_400x400.jpg", "FunTime", '06:37 AM , 2 Dec', "https://thumbs.dreamstime.com/b/fun-time-concept-toy-objects-child-education-yellow-background-142226373.jpg", "Coming Soon...", 37, 2, 58)
-            // })
-    //         function insertpost(dp, name, date, img, text, likes, dislikes, comments) {
-
-    //             let train = `<div class="post">
-    //     <div class="post-details">
-    //         <img src=${dp}
-    //             alt="">
-    //         <div class="name-time">
-    //             <h4>${name}</h4>
-    //             <p>${date}</p>
-    //         </div>
-    //     </div>
-    //     <div class="post-data">
-    //         <p>${text}</p>
-    //         <img src=${img}
-    //             alt="">
-
-    //     </div>
-    //     <div class="reaction-section">
-    //         <div class="reaction-section-details">
-    //             <p>${likes} Likes</p>
-    //             <p>${dislikes} Dislikes</p>
-    //             <p style="margin-left: auto;">${comments} Comments</p>
-    //         </div>
-
-    //         <div class="reaction-option">
-    //             <div class="love-reaction">
-    //                 <img src="/Pngs/heart-unlike.png" alt="">
-    //                 <p>Love</p>
-    //             </div>
-    //             <div class="comment-section">
-    //                 <img src="/Pngs/commentpng.png" alt="">
-    //                 <p>Comments</p>
-    //             </div>
-    //         </div>
-    //     </div>
-    // </div>`
-    //             document.getElementById('main').innerHTML += train
-    //         }
-        </script>
+  
 
 
 

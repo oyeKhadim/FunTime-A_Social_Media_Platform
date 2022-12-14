@@ -46,9 +46,10 @@ var username = document.getElementById("username");
 var password = document.getElementById("password");
 
 
-
 function SelectData() {
 	const dbref = ref(db);
+
+	// setTimeout(()=>{},1000)
 	get(child(dbref, "Usernames/" + username.value)).then((snapshot) => {
 		if (snapshot.exists()) {
 			if(username.value == snapshot.val().username&&
@@ -56,6 +57,7 @@ function SelectData() {
 				set(ref(db, "loggedInuser/"), {
 					username: username.value,
 					password: password.value,
+				
 				})
 					.then(() => {
 						alert("Loggend in user Data stored suxxessfully");
