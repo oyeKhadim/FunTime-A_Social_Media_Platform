@@ -3,7 +3,7 @@ let username = "123",
 	fullName,
 	imgurl;
 let checkDataLoaded = false;
-
+//---------------------------------------Post picture Compressing----------------------------------------
 const MAX_WIDTH = 320;
 const MAX_HEIGHT = 180;
 const MIME_TYPE = "image/jpeg";
@@ -93,6 +93,7 @@ function imageUploaded(myfile) {
 	};
 	reader.readAsDataURL(file);
 }
+
 window.onload = () => {
 	const dbref = ref(db);
 	get(child(dbref, "loggedInuser/")).then((snapshot) => {
@@ -101,8 +102,7 @@ window.onload = () => {
 			console.log(username + "1");
 		}
 	});
-		
-		
+
 	setTimeout(() => {
 		console.log(username + "2");
 		get(child(dbref, "PostCount/" + username)).then((snapshot) => {
@@ -113,7 +113,9 @@ window.onload = () => {
 		});
 		SelectData();
 	}, 2000);
+	addPosts();
 };
+
 let createPost_btn = document.getElementById("createPost_btn");
 // createPost_btn.addEventListener('click',show_newpost_popup())
 let cancle_btn = document.getElementById("cancle_btn");
@@ -132,19 +134,12 @@ function show_newpost_popup() {
 let btn = document.getElementById("post_btn");
 btn.onclick = () => {
 	storePostInDataBase();
-	insertpost(
-		"https://pbs.twimg.com/profile_images/1021772856567517189/54w9XjA4_400x400.jpg",
-		"FunTime",
-		"06:37 AM , 2 Dec",
-		"https://thumbs.dreamstime.com/b/fun-time-concept-toy-objects-child-education-yellow-background-142226373.jpg",
-		"Coming Soon...",
-		37,
-		2,
-		58
-	);
 	show_newpost_popup();
 };
-
+let loadPost_btn = document.getElementById("load_posts");
+loadPost_btn.onclick = () => {
+	addPosts();
+};
 function insertpost(dp, name, date, img, text, likes, dislikes, comments) {
 	let train = `<div class="post">
         <div class="post-details">
@@ -222,7 +217,6 @@ function loadLoggedInUser() {
 	get(child(dbref, "loggedInuser/")).then((snapshot) => {
 		if (snapshot.exists()) {
 			username = snapshot.val().username;
-			
 		}
 	});
 }
@@ -236,6 +230,8 @@ function SelectData() {
 		if (snapshot.exists()) {
 			imgurl = snapshot.val().imgurl;
 			document.getElementById("profile_pic").src = imgurl;
+			document.getElementById("profile_pic_createPost").src = imgurl;
+			
 			console.log(imgurl);
 		}
 	});
@@ -266,19 +262,39 @@ function storePostInDataBase() {
 	text.value = "";
 }
 function updatevalues() {
-	
-	
-			set(ref(db, "PostCount/" + username), {
-				postCount: postCount,
-			})
-				.then(() => {
-					alert("Data stored suxxessfully");
-				})
-				.catch((error) => {
-					alert("Error: " + error);
-				});
-		
-		
-
+	set(ref(db, "PostCount/" + username), {
+		postCount: postCount,
+	})
+		.then(() => {
+			alert("Data stored suxxessfully");
+		})
+		.catch((error) => {
+			alert("Error: " + error);
+		});
+}
+function addPosts() {
+	let postauthorImgUrl =
+			"https://lh3.googleusercontent.com/hELpn1DhzoxKewQkTgpKL6DCMH00fBaOn0cdgDHOyWLv1DLR5s-WsJg-YTtt8S1zh7oYhv2Bv8zrrpIvYoIjZB34YLa6_9iut71yCtDhSUCkJLKVE4ZiOKITlhWVADRtBU5wwoE7Q4s55Yal03WvzY_EsQrgBs1HNmaeyKNBKAC5UcsL__IPx9Undnpf--fEEbiyzRbhEhbZcQe9cCgEAsK4DXteYfGdQvhNwO0kiQxDVtUEZq3kjn79WG9gI9mr-tOVyiipG3WovA6FrdykOo0kyB-Kxm5xtu6We3z3ZCRkfOhitJ7MG7yydBOStYYeUZdsPPvIiPTs_XcuXbgAomzVPhKE4lLWiONmtOtcfqFj5HitkCvoW7tEPxKyAidU5rnUYqql8McV_kMV-kljyEEaDpMI54nbWGp3SQ0tVJAsfzzobA47Q1BsDXSjxgV7KtnycD_uIE1KQ2nvFMyVI_lcZkKQPejNbils7MyiL412E3S6pUm6dkwqUQ9f9qgki5HDx4uBU05jn6H8d7xxvwyQBLbdiaMVr5DvyknkiAejPKU0sJdM3upl5nq7K9s7Bbip1LiLsVAnMDhzKUKdC0enQ7021sjA_lwOeFEYPmU7oQmCUphl673RI_ba-vsp8iwgw3suUDx-tLpOmA6vI931Ha2Qt7LDXZEYllTfYbXXQmfYSxjFs4PUZtwwm2NHVNNmQAEjI-BXNjbS6qhEXDnvBIw-sMbMmNGK8R8977xJp6jgp_MrTwjBR0O4czlYSRUKfEpRiKpudNYaV9p8tw3_08-fyloZavVV4MrZk1HqEIpM6rDwXC4duAmEvU7KFMEZwHdEKE_rmtwd2AGpiLwW8HQ-m1bjZ8nFfi23d6AZWNsT2bvlYVOZucvIYLYs8lYHf5Ea5DbKbPPpdlAXEqR3qVBl2ORFOJ7TxKuxCKlc=w207-h276-no?authuser=0",
+		postImgurl =
+			"https://thumbs.dreamstime.com/b/fun-time-concept-toy-objects-child-education-yellow-background-142226373.jpg",
+		authorName = "Khadim Hussain",
+		date = "06:37 AM , 2 Dec",
+		text = "How is it Looking...",
+		noOfLikes = 5,
+		noOfDislikes = 1,
+		noOfComments = 3;
+	for (let i = 0; i < 5; i++) {
+		insertpost(
+			postauthorImgUrl,
+			authorName,
+			date, //"06:37 AM , 2 Dec",
+			postImgurl, 
+			
+			text, //"Coming Soon...",
+			noOfLikes, //37,
+			noOfDislikes, //2,
+			noOfComments //58
+		);
+	}
 }
 // <-------------------------------------------Linking Ends Here------------------------------------------>
