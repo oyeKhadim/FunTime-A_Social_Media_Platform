@@ -157,7 +157,7 @@ function ShowFriendCard() {
 	let extraFeatures = document.getElementById('extra-features');
 	extraFeatures.innerHTML += `<div id="person_card">
 	<a href="#" class="no-link">
-		<div id="view-profile">
+		<div id="view-profile" >
 			<img id="profile_pic" class="profile_pic"
 				src="https://uxwing.com/wp-content/themes/uxwing/download/peoples-avatars/no-profile-picture-icon.png"
 				alt="">
@@ -167,6 +167,35 @@ function ShowFriendCard() {
 </div>`;
 }
 
+//		Friends Requests
+
+let requests=document.getElementById('friend-requests');
+requests.onclick=()=>{
+	let extraFeatures = document.getElementById('extra-features');
+	extraFeatures.innerHTML = `<h4 id="extra_header">Friends Requests</h4>`;
+	let i = 0;
+	for (i = 0; i < 10; i++) {
+		ShowPersonCard();
+	}
+}
+function ShowPersonCard() {
+	let extraFeatures = document.getElementById('extra-features');
+	extraFeatures.innerHTML += `<div id="person_card">
+	<a href="#" class="no-link">
+		<div id="view-profile">
+			<img id="profile_pic" class="profile_pic"
+				src="https://uxwing.com/wp-content/themes/uxwing/download/peoples-avatars/no-profile-picture-icon.png"
+				alt="">
+			<h6 style="text-align: center;">Person Name</h6>
+		</div>
+	</a>
+	<div id="add_friend" class="flex-row">
+		<div id="acceptRequest" class="setting-card" style="width: 50%;">Accept</div>
+		<div id="declineRequest"  style="width: 50%">Reject</div>
+		
+	</div>
+</div>`;
+}
 
 
 //	notification
