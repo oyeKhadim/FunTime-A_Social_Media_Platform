@@ -117,6 +117,7 @@
     width: 100%;
 }
 #extra-features{
+    padding: 5px;
     display: flex;
     flex-direction: column;
 }
@@ -147,4 +148,31 @@
 #declineRequest:hover{
     background-color: red;
     color: white;
+}
+#userBanner{
+    width: 100%;
+}
+#userProfilePic{
+    width: 100px;
+    height: 100px;
+    margin-left: 30px;
+    margin-top: -40px;
+    border-radius: 100%;
+    overflow: hidden;
+    padding: 5px;
+    border: 5px solid #00afda;
+}
+#fullname{
+    margin-left: 140px;
+    margin-top: -40px;
+    margin-bottom: 25px;
+}
+#userDetails{
+    margin: 3px 3px;
+    border-radius: 5px;
+    border: 1px solid grey;
+    padding: 5px;
+}
+.userCard{
+    display: flex;
 }

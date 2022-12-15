@@ -151,7 +151,6 @@ viewFriends.onclick = () => {
 	for (i = 0; i < 10; i++) {
 		ShowFriendCard();
 	}
-
 }
 function ShowFriendCard() {
 	let extraFeatures = document.getElementById('extra-features');
@@ -180,7 +179,7 @@ requests.onclick=()=>{
 }
 function ShowPersonCard() {
 	let extraFeatures = document.getElementById('extra-features');
-	extraFeatures.innerHTML += `<div id="person_card">
+	extraFeatures.innerHTML += `<div id="person_card"'>
 	<a href="#" class="no-link">
 		<div id="view-profile">
 			<img id="profile_pic" class="profile_pic"
@@ -195,6 +194,34 @@ function ShowPersonCard() {
 		
 	</div>
 </div>`;
+}
+//   onfriend card click
+let personCard=document.getElementById('btnn');
+personCard.onclick=()=>{
+	let extraFeatures = document.getElementById('extra-features');
+	extraFeatures.innerHTML += `<div id="userProfile">
+	<img id="userBanner" src="/Pngs/banner.jpg" alt="">
+	<img id="userProfilePic" src="/Pngs/pic.jpg" alt="">
+	<h4 id="fullname"><b> Abdul Mateen</b></h4>
+	<div id="userDetails">
+		<div class="userCard">
+			<h6><b> Username :&nbsp&nbsp&nbsp&nbsp</b></h6>
+			<h6>abdulmateen</h6>
+		</div>
+		<hr>
+		<div class="userCard">
+			<h6><b> Email :&nbsp&nbsp&nbsp&nbsp</b></h6>
+			<h6>abdulmateen@mail.com</h6>
+		</div>
+		<hr>
+		<div class="userCard">
+			<h6><b> Bio :&nbsp&nbsp&nbsp&nbsp</b></h6>
+			<h6>COOL</h6>
+		</div>
+	</div>
+	<div id="friendshipInfo" class="setting-card" style="text-align: center;">Add Friend</div>
+</div>`;
+
 }
 
 
