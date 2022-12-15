@@ -168,8 +168,8 @@ function ShowFriendCard() {
 
 //		Friends Requests
 
-let requests=document.getElementById('friend-requests');
-requests.onclick=()=>{
+let requests = document.getElementById('friend-requests');
+requests.onclick = () => {
 	let extraFeatures = document.getElementById('extra-features');
 	extraFeatures.innerHTML = `<h4 id="extra_header">Friends Requests</h4>`;
 	let i = 0;
@@ -196,8 +196,36 @@ function ShowPersonCard() {
 </div>`;
 }
 //   onfriend card click
-let personCard=document.getElementById('btnn');
-personCard.onclick=()=>{
+// let personCard = document.getElementById('btnn');
+// personCard.onclick = () => {
+// 	let extraFeatures = document.getElementById('extra-features');
+// 	extraFeatures.innerHTML += `<div id="userProfile">
+// 	<img id="userBanner" src="/Pngs/banner.jpg" alt="">
+// 	<img id="userProfilePic" src="/Pngs/pic.jpg" alt="">
+// 	<h4 id="fullname"><b> Abdul Mateen</b></h4>
+// 	<div id="userDetails">
+// 		<div class="userCard">
+// 			<h6><b> Username :&nbsp&nbsp&nbsp&nbsp</b></h6>
+// 			<h6>abdulmateen</h6>
+// 		</div>
+// 		<hr>
+// 		<div class="userCard">
+// 			<h6><b> Email :&nbsp&nbsp&nbsp&nbsp</b></h6>
+// 			<h6>abdulmateen@mail.com</h6>
+// 		</div>
+// 		<hr>
+// 		<div class="userCard">
+// 			<h6><b> Bio :&nbsp&nbsp&nbsp&nbsp</b></h6>
+// 			<h6>COOL</h6>
+// 		</div>
+// 	</div>
+// 	<div id="friendshipInfo" class="setting-card" style="text-align: center;">Add Friend</div>
+// </div>`;
+// }
+
+					// is function ko call karna hai jb wo user profile par click kara
+function fun() {
+	console.log('hi')
 	let extraFeatures = document.getElementById('extra-features');
 	extraFeatures.innerHTML += `<div id="userProfile">
 	<img id="userBanner" src="/Pngs/banner.jpg" alt="">
@@ -221,10 +249,7 @@ personCard.onclick=()=>{
 	</div>
 	<div id="friendshipInfo" class="setting-card" style="text-align: center;">Add Friend</div>
 </div>`;
-
 }
-
-
 //	notification
 
 let notiBtn = document.getElementById('notification_btn');
