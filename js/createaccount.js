@@ -1,28 +1,3 @@
-import { Data1 } from "../DataLayer.js";
-// let signup = document.getElementById('signup');
-// signup.onclick = (() => {
-//     let user = document.getElementById('username').value;
-//     let pass = document.getElementById('password').value;
-//     let repass = document.getElementById('repassword').value;
-//     if (pass == repass) {
-//         if (Data1.usernameValid(user)) {
-//             if (!Data1.checkUserExist(user)) {
-//                 alert("succesful");
-//                 Data1.persons.set(user, pass)   // <--It is working now
-//                 console.log(Data1.persons);
-//                 // open page
-//             } else {
-//                 alert("Username already Taken.");
-//             }
-//         }
-//         else {
-//             alert('Username is not valid. There must be no spaces.')
-//         }
-//     }
-//     else {
-//         alert('Password does not match.')
-//     }
-// })
 let showpassword = document.getElementById("showpassword");
 showpassword.onclick = () => {
 	if (document.getElementById("password").type == "text") {
@@ -36,7 +11,12 @@ showpassword.onclick = () => {
 	showpassword.src = "../Pngs/openeye.png";
 	document.getElementById("repassword").type = "text";
 };
-
+function usernameValid(str) {
+        if(str.length<5){
+            return false;
+        }
+		return !str.includes(" ");
+	}
 //<--------------------------------Bachy is code se door rahy--------------------------------------->
 
 //<------------------------------------Linking With DataBase---------------------------------------->
@@ -85,7 +65,7 @@ function insertData() {
 	let repass = document.getElementById("repassword").value;
 	setTimeout(() => {
 		if (pass == repass) {
-			if (Data1.usernameValid(user)) {
+			if (usernameValid(user)) {
 				if (flag) {
 					alert("Username already Taken.");
 				} else {
