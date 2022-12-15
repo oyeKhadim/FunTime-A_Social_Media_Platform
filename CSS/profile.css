@@ -16,7 +16,7 @@ body {
     height: 200px;
     overflow: hidden;
     padding: 4px;
-    border: 10px dashed #0a4d5e;
+    border: 10px solid #ec6810;
 }
 
 #Username {
@@ -37,8 +37,4 @@ body {
 .data-card {
     display: flex;
     margin: 5px;
-}
-
-.highlight {
-    
 }

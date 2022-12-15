@@ -39,9 +39,13 @@
     margin: 5px;
 }
 
-#view-profile img {
-    height: 40px;
+.profile_pic {
+    height: 50px;
+    width: 50px;
+    border-radius: 100%;
     margin: 2px 3px;
+    overflow: hidden;
+
 }
 
 #view-profile h6 {
@@ -71,10 +75,6 @@
     border-radius: 10px;
     display: flex;
     /* height: 100px; */
-}
-#new-post img{
-    height: 50px;
-    border-radius: 100%;
 }
 #new-post button{
     font-size: large;
@@ -114,5 +114,19 @@
 
 #new-post-img {
     width: 100%;
-
+}
+#extra-features{
+    display: flex;
+    flex-direction: column;
+}
+#person_card{
+    width: auto;
+    border-radius: 6px;
+    border: 1px solid grey;
+    margin: 5px;
+    /* padding: 20px; */
+}
+#extra_header{
+    color: #00afda;
+    margin: 5px 10px;
 }

@@ -1,8 +1,8 @@
 #notification {
-    margin: 10px 5%;
+    margin: 5px;
     /* height: 100px; */
     border-radius: 10px;
-    border: 1px solid red;
+    border: 1px solid grey;
     display: flex;
     padding: 10px;
 }
@@ -17,5 +17,4 @@
 #text-content {
     margin-left: 10px;
     padding: 10px;
-    border-bottom: 1px solid grey;
 }

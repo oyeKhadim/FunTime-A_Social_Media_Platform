@@ -140,10 +140,57 @@ let loadPost_btn = document.getElementById("load_posts");
 loadPost_btn.onclick = () => {
 	addPosts();
 };
+
+//		Adding it to insert friend on btn click
+
+let viewFriends = document.getElementById("view_friends");
+viewFriends.onclick = () => {
+	let extraFeatures = document.getElementById('extra-features');
+	extraFeatures.innerHTML = `<h4 id="extra_header">Friend List</h4>`;
+	let i = 0;
+	for (i = 0; i < 10; i++) {
+		ShowFriendCard();
+	}
+
+}
+function ShowFriendCard() {
+	let extraFeatures = document.getElementById('extra-features');
+	extraFeatures.innerHTML += `<div id="person_card">
+	<a href="#" class="no-link">
+		<div id="view-profile">
+			<img id="profile_pic" class="profile_pic"
+				src="https://uxwing.com/wp-content/themes/uxwing/download/peoples-avatars/no-profile-picture-icon.png"
+				alt="">
+			<h6 style="text-align: center;">Person Name</h6>
+		</div>
+	</a>
+</div>`;
+}
+
+
+
+//	notification
+
+let notiBtn = document.getElementById('notification_btn');
+notiBtn.onclick = () => {
+	let extraFeatures = document.getElementById('extra-features');
+	extraFeatures.innerHTML = `<h4 id="extra_header">Notifications</h4>`;
+	extraFeatures.innerHTML += `<div id="notification">
+                <div id="notification-img">
+				<img src="/Pngs/pic.jpg" alt="">
+			</div>
+			<div id="text-content">
+				Ali liked your photo.
+			</div>
+		</div > `;
+}
+
+//	/	/	/	/	/	/	/	/	/	/	/	/
+
 function insertpost(dp, name, date, img, text, likes, dislikes, comments) {
-	let train = `<div class="post">
+	let train = `<div class="post" >
         <div class="post-details">
-            <img src=${dp}
+            <img src=${dp} class="profile_pic"
                 alt="">
             <div class="name-time">
                 <h4>${name}</h4>
@@ -174,7 +221,7 @@ function insertpost(dp, name, date, img, text, likes, dislikes, comments) {
                 </div>
             </div>
         </div>
-    </div>`;
+    </ > `;
 	document.getElementById("posts_section").innerHTML += train;
 }
 
@@ -231,7 +278,7 @@ function SelectData() {
 			imgurl = snapshot.val().imgurl;
 			document.getElementById("profile_pic").src = imgurl;
 			document.getElementById("profile_pic_createPost").src = imgurl;
-			
+
 			console.log(imgurl);
 		}
 	});
@@ -274,7 +321,7 @@ function updatevalues() {
 }
 function addPosts() {
 	let postauthorImgUrl =
-			"https://lh3.googleusercontent.com/hELpn1DhzoxKewQkTgpKL6DCMH00fBaOn0cdgDHOyWLv1DLR5s-WsJg-YTtt8S1zh7oYhv2Bv8zrrpIvYoIjZB34YLa6_9iut71yCtDhSUCkJLKVE4ZiOKITlhWVADRtBU5wwoE7Q4s55Yal03WvzY_EsQrgBs1HNmaeyKNBKAC5UcsL__IPx9Undnpf--fEEbiyzRbhEhbZcQe9cCgEAsK4DXteYfGdQvhNwO0kiQxDVtUEZq3kjn79WG9gI9mr-tOVyiipG3WovA6FrdykOo0kyB-Kxm5xtu6We3z3ZCRkfOhitJ7MG7yydBOStYYeUZdsPPvIiPTs_XcuXbgAomzVPhKE4lLWiONmtOtcfqFj5HitkCvoW7tEPxKyAidU5rnUYqql8McV_kMV-kljyEEaDpMI54nbWGp3SQ0tVJAsfzzobA47Q1BsDXSjxgV7KtnycD_uIE1KQ2nvFMyVI_lcZkKQPejNbils7MyiL412E3S6pUm6dkwqUQ9f9qgki5HDx4uBU05jn6H8d7xxvwyQBLbdiaMVr5DvyknkiAejPKU0sJdM3upl5nq7K9s7Bbip1LiLsVAnMDhzKUKdC0enQ7021sjA_lwOeFEYPmU7oQmCUphl673RI_ba-vsp8iwgw3suUDx-tLpOmA6vI931Ha2Qt7LDXZEYllTfYbXXQmfYSxjFs4PUZtwwm2NHVNNmQAEjI-BXNjbS6qhEXDnvBIw-sMbMmNGK8R8977xJp6jgp_MrTwjBR0O4czlYSRUKfEpRiKpudNYaV9p8tw3_08-fyloZavVV4MrZk1HqEIpM6rDwXC4duAmEvU7KFMEZwHdEKE_rmtwd2AGpiLwW8HQ-m1bjZ8nFfi23d6AZWNsT2bvlYVOZucvIYLYs8lYHf5Ea5DbKbPPpdlAXEqR3qVBl2ORFOJ7TxKuxCKlc=w207-h276-no?authuser=0",
+		"https://lh3.googleusercontent.com/hELpn1DhzoxKewQkTgpKL6DCMH00fBaOn0cdgDHOyWLv1DLR5s-WsJg-YTtt8S1zh7oYhv2Bv8zrrpIvYoIjZB34YLa6_9iut71yCtDhSUCkJLKVE4ZiOKITlhWVADRtBU5wwoE7Q4s55Yal03WvzY_EsQrgBs1HNmaeyKNBKAC5UcsL__IPx9Undnpf--fEEbiyzRbhEhbZcQe9cCgEAsK4DXteYfGdQvhNwO0kiQxDVtUEZq3kjn79WG9gI9mr-tOVyiipG3WovA6FrdykOo0kyB-Kxm5xtu6We3z3ZCRkfOhitJ7MG7yydBOStYYeUZdsPPvIiPTs_XcuXbgAomzVPhKE4lLWiONmtOtcfqFj5HitkCvoW7tEPxKyAidU5rnUYqql8McV_kMV-kljyEEaDpMI54nbWGp3SQ0tVJAsfzzobA47Q1BsDXSjxgV7KtnycD_uIE1KQ2nvFMyVI_lcZkKQPejNbils7MyiL412E3S6pUm6dkwqUQ9f9qgki5HDx4uBU05jn6H8d7xxvwyQBLbdiaMVr5DvyknkiAejPKU0sJdM3upl5nq7K9s7Bbip1LiLsVAnMDhzKUKdC0enQ7021sjA_lwOeFEYPmU7oQmCUphl673RI_ba-vsp8iwgw3suUDx-tLpOmA6vI931Ha2Qt7LDXZEYllTfYbXXQmfYSxjFs4PUZtwwm2NHVNNmQAEjI-BXNjbS6qhEXDnvBIw-sMbMmNGK8R8977xJp6jgp_MrTwjBR0O4czlYSRUKfEpRiKpudNYaV9p8tw3_08-fyloZavVV4MrZk1HqEIpM6rDwXC4duAmEvU7KFMEZwHdEKE_rmtwd2AGpiLwW8HQ-m1bjZ8nFfi23d6AZWNsT2bvlYVOZucvIYLYs8lYHf5Ea5DbKbPPpdlAXEqR3qVBl2ORFOJ7TxKuxCKlc=w207-h276-no?authuser=0",
 		postImgurl =
 			"https://thumbs.dreamstime.com/b/fun-time-concept-toy-objects-child-education-yellow-background-142226373.jpg",
 		authorName = "Khadim Hussain",
@@ -288,8 +335,8 @@ function addPosts() {
 			postauthorImgUrl,
 			authorName,
 			date, //"06:37 AM , 2 Dec",
-			postImgurl, 
-			
+			postImgurl,
+
 			text, //"Coming Soon...",
 			noOfLikes, //37,
 			noOfDislikes, //2,
