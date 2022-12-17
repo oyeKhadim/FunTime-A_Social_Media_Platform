@@ -408,16 +408,17 @@ function addPosts() {
 
 		post.forEach((element) => {
 			console.log(element.data);
-			let authorDp = "",
+			let authorDp =
+					"https://uxwing.com/wp-content/themes/uxwing/download/peoples-avatars/no-profile-picture-icon.png",
 				authorName = "Unknown";
 			const dbref = ref(db);
-			get(child(dbref, "Usernames/" + element.data.author)).then((snapshot) => {
-				if (snapshot.exists()) {
-					authorDp = snapshot.val().imgurl;
-					authorName = snapshot.val().fullName;
-				}
-			});
-			let postauthorImgUrl = authorDp,
+			const author = ref(db, "Usernames/" + element.data.author);
+			onValue(author,snapshot=>{
+				authorDp = snapshot.val().imgurl;
+				authorName = snapshot.val().fullName;
+			})
+			
+			let 
 				postImgurl = element.data.imgurl,
 				date = "06:37 AM , 2 Dec",
 				text = element.data.text,
@@ -426,7 +427,7 @@ function addPosts() {
 				noOfComments = element.data.comments;
 			setTimeout(() => {
 				insertpost(
-					postauthorImgUrl,
+					authorDp,
 					authorName,
 					date, //"06:37 AM , 2 Dec",
 					postImgurl,
