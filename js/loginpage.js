@@ -15,7 +15,6 @@ showpassword.onclick = () => {
 
 import { initializeApp } from "https://www.gstatic.com/firebasejs/9.15.0/firebase-app.js";
 import { getAnalytics } from "https://www.gstatic.com/firebasejs/9.15.0/firebase-analytics.js";
-
 const firebaseConfig = {
 	apiKey: "AIzaSyDgjxC3pegDxwodMo_tBF6og-5NAtccu_U",
 	authDomain: "justteatingfirebase.firebaseapp.com",
@@ -39,6 +38,10 @@ import {
 	child,
 	update,
 	remove,
+	query,
+	onValue,
+	orderByKey,
+	orderByChild,
 } from "https://www.gstatic.com/firebasejs/9.15.0/firebase-database.js";
 const db = getDatabase();
 
@@ -75,10 +78,60 @@ function SelectData() {
 			alert("No Data Found");
 		}
 	});
+	
     
 }
+function checking() {
+	const dbref = ref(db);
+	const khadim=child(dbref,'Usernames');
+	//update just one entry
+	// let count=""
+	// get(khadim).then((snapshot)=>{
+	// 	count=snapshot.val().postCount;
+	// 	count += "123";
+	// })
+	// setTimeout(()=>{
+	// 	update(khadim,{postCount:count})
 
+	// },1000)
+	
+
+	//loop
+	// once(khadim,snap=>{
+	// 	snap.forEach(eventSnap => {
+	// 		console.log(eventSnap);
+	// 	});
+	// })
+// 	const mostViewedPosts = query(
+// 		ref(db, "PostCount"),
+// 		orderByChild("PostCount")
+// 	);
+// console.log(mostViewedPosts)
+
+
+// Retrive Posts
+// const Posts = ref(db, "Posts/");
+// onValue(Posts, (snapshot) => {
+// 	const data = snapshot.val();
+// 	let post = [];
+// 	Object.keys(data).forEach((key) => {
+// 		post.push({
+// 			name: key,
+// 			data: data[key],
+// 		});
+// 	});
+
+// 	post.forEach((element) => {
+// 		console.log(element.data);
+// 	});
+// });
+
+
+
+}
 var signinbtn = document.getElementById("signinbtn");
 signinbtn.addEventListener("click", SelectData);
+// signinbtn.addEventListener('click',checking);
+
 
 // <-------------------------------------------Linking Ends Here------------------------------------------>
