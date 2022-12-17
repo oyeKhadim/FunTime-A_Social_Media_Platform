@@ -150,7 +150,8 @@ function insertDetails() {
 			addFriendPrivacy: false,
 			showFriendPrivacy: false,
 			isVerified: false,
-			
+			friends:"",
+			friendRequests:"",
 		})
 			.then(() => {
 				alert("Details stored suxxessfully");
