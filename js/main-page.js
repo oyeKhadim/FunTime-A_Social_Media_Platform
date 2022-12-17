@@ -4,8 +4,8 @@ let username = "123",
 	imgurl;
 let checkDataLoaded = false;
 //---------------------------------------Post picture Compressing----------------------------------------
-const MAX_WIDTH = 320;
-const MAX_HEIGHT = 180;
+const MAX_WIDTH = 1280;
+const MAX_HEIGHT = 720;
 const MIME_TYPE = "image/jpeg";
 const QUALITY = 0.7;
 let post_imgurl;
@@ -40,6 +40,7 @@ input.onchange = function (ev) {
 			MIME_TYPE,
 			QUALITY
 		);
+		document.getElementById("root").innerHTML = "";
 		document.getElementById("root").append(canvas);
 	};
 };
@@ -64,6 +65,7 @@ function calculateSize(img, maxWidth, maxHeight) {
 }
 
 // Utility functions for demo purpose
+//this funtion will be removed later
 
 function displayInfo(label, file) {
 	const p = document.createElement("p");
@@ -111,7 +113,6 @@ window.onload = () => {
 		SelectData();
 	}, 3000);
 	addPosts();
-	
 };
 
 let createPost_btn = document.getElementById("createPost_btn");
@@ -120,6 +121,8 @@ let cancle_btn = document.getElementById("cancle_btn");
 // cancle_btn.addEventListener('click',show_newpost_popup())
 createPost_btn.onclick = () => {
 	show_newpost_popup();
+	clearPostDetails();
+
 };
 cancle_btn.onclick = () => {
 	show_newpost_popup();
@@ -129,11 +132,17 @@ function show_newpost_popup() {
 	btn.classList.toggle("show-newpost-popup");
 }
 
-let btn = document.getElementById("post_btn");
-btn.onclick = () => {
+let post_btn = document.getElementById("post_btn");
+post_btn.onclick = () => {
 	storePostInDataBase();
 	show_newpost_popup();
+	clearPostDetails();
 };
+function clearPostDetails() {
+	document.getElementById("root").innerHTML = "";
+	document.getElementById("caption-area").value="";
+	document.getElementById("img-input").value = null;
+}
 let loadPost_btn = document.getElementById("load_posts");
 loadPost_btn.onclick = () => {
 	addPosts();
@@ -338,16 +347,6 @@ import {
 } from "https://www.gstatic.com/firebasejs/9.15.0/firebase-database.js";
 const db = getDatabase();
 
-function loadLoggedInUser() {
-	const dbref = ref(db);
-
-	get(child(dbref, "loggedInuser/")).then((snapshot) => {
-		if (snapshot.exists()) {
-			username = snapshot.val().username;
-		}
-	});
-}
-
 function SelectData() {
 	const dbref = ref(db);
 	get(child(dbref, "Usernames/" + username)).then((snapshot) => {
@@ -413,13 +412,12 @@ function addPosts() {
 				authorName = "Unknown";
 			const dbref = ref(db);
 			const author = ref(db, "Usernames/" + element.data.author);
-			onValue(author,snapshot=>{
+			onValue(author, (snapshot) => {
 				authorDp = snapshot.val().imgurl;
 				authorName = snapshot.val().fullName;
-			})
-			
-			let 
-				postImgurl = element.data.imgurl,
+			});
+
+			let postImgurl = element.data.imgurl,
 				date = "06:37 AM , 2 Dec",
 				text = element.data.text,
 				noOfLikes = element.data.likes,
