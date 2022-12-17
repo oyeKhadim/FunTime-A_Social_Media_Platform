@@ -307,12 +307,18 @@ function showSearchedUser(
                             <h6>${bio}</h6>
                         </div>
                     </div>
-                    <div id="${id}" class="setting-card" onclick="addFriend()" style="text-align: center;">${friendShipStatus}</div>
+                    <div id="${id}" class="setting-card" style="text-align: center;">${friendShipStatus}</div>
                 </div>`;
 
 	document.getElementById("extra-features").innerHTML = train;
+	let get = document.getElementById(id);
+	get.onclick = () => {
+		addFriend();
+	};
 }
-function addFriend() {}
+function addFriend() {
+	console.log("data");
+}
 let view_friends = document.getElementById("view_friends");
 view_friends.onclick = () => {
 	let extraFeatures = document.getElementById("extra-features");
@@ -327,13 +333,13 @@ view_friends.onclick = () => {
 	console.log(friendArr);
 	friendArr.forEach((element) => {
 		const friendRef2 = ref(db, "Usernames/" + element);
-		onValue(friendRef2,snapshot=>{
-			ShowFriendCard(snapshot.val().imgurl,snapshot.val().fullName)
-		})
+		onValue(friendRef2, (snapshot) => {
+			ShowFriendCard(snapshot.val().imgurl, snapshot.val().fullName);
+		});
 	});
 };
 let view_friends_requests = document.getElementById("friend-requests");
-view_friends_requests.onclick=()=>{
+view_friends_requests.onclick = () => {
 	let extraFeatures = document.getElementById("extra-features");
 	extraFeatures.innerHTML = `<h4 id="extra_header">Friend Requests</h4>`;
 	const friendRef = ref(db, "Usernames/" + username);
@@ -343,7 +349,7 @@ view_friends_requests.onclick=()=>{
 	});
 	let friendArr = [];
 	if (friendRequests.length > 0) friendArr = friendRequests.split(" ");
-	else{
+	else {
 		extraFeatures.innerHTML += `<p >No Pending Requests</p>`;
 	}
 	console.log(friendArr);
@@ -353,7 +359,7 @@ view_friends_requests.onclick=()=>{
 			ShowPersonCard(snapshot.val().imgurl, snapshot.val().fullName);
 		});
 	});
-}
+};
 let createPost_btn = document.getElementById("createPost_btn");
 // createPost_btn.addEventListener('click',show_newpost_popup())
 let cancle_btn = document.getElementById("cancle_btn");
