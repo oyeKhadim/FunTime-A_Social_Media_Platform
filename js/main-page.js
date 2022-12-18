@@ -527,10 +527,9 @@ function insertpost(dp, name, date, img, text, likes, dislikes, comments) {
                 <p>${dislikes} Dislikes</p>
                 <p style="margin-left: auto;">${comments} Comments</p>
             </div>
-
             <div class="reaction-option">
                 <div class="love-reaction">
-                    <img src="/Pngs/heart-unlike.png" alt="">
+                    <img id="unlikedbtn" src="/Pngs/heart-unlike.png" alt="">
                     <p>Love</p>
                 </div>
                 <div class="comment-section">
@@ -540,5 +539,14 @@ function insertpost(dp, name, date, img, text, likes, dislikes, comments) {
             </div>
         </div>
     </ > `;
+	// Solve this error
 	document.getElementById("posts_section").innerHTML += train;
+	let gt= document.getElementById('unlikedbtn');
+	// gt.addEventListener('click',ge());
+	gt.onclick=(element)=>{
+		
+		console.log('hiii')
+		gt.src='/Pngs/heart-liked.png';
+	}
+		
 }
