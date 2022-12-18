@@ -418,7 +418,9 @@ function ShowFriendCard(dp, name) {
 	// Added this so when user clicks on the profile of his friend it will show his profile
 	let get = document.getElementById('person_card');
 	get.onclick = () => {
-		fun();		//Call function you call when someone search for username
+		showSearchedUser(dp,name,'n','@','cool',true,'id');			
+		//Call function you call when someone search for username
+		// complete this by matching the user name with the data on db
 	}
 }
 
@@ -453,7 +455,8 @@ function ShowPersonCard(dp, name) {
 	// Added this so when user clicks on the profile of his friend it will show his profile
 	let get = document.getElementById('person_card');
 	get.onclick = () => {
-		fun();		//Call function you call when someone search for username
+		showSearchedUser(dp,name,'n','@','cool',true,'id');		
+		//Call function you call when someone search for Username    // i changed so you do not have to
 	}
 }
 //   onfriend card click
