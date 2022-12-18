@@ -108,7 +108,37 @@
                     <h5 style="margin-left: 5px;">UserName</h5>
                 </div>
                 <div id="msg_div">
-                    <div class="message">AssalmuAlaikum</div>
+                    <div class="message">
+                        <div class="msg_sent">or Projects!!!</div>
+                    </div>
+                    <div class="message">
+                        <div class="msg_sent">Finals ki tayari!!!</div>
+                    </div>
+                    <div class="message">
+                        <div class="msg_recieved">Allah Ka Shukar! Ap Bataen kia ho raha hai aj Kal?</div>
+                    </div>
+                    <div class="message">
+                        <div class="msg_sent">Kia Hal hai?</div>
+                    </div>
+                    <div class="message">
+                        <div class="msg_recieved">Wasalam</div>
+                    </div>
+                    <div class="message">
+                        <div class="msg_recieved">Assalamualikum</div>
+                    </div>
+                    <script>
+                        let get = document.getElementById('msg_div');
+                        let train = document.createElement('div');
+                        train.classList+='message';
+                        let inn=document.createElement('div');
+                        inn.classList="msg_sent";
+                        inn.innerText="haha";
+                        train.appendChild(inn);
+                        // `<div class="message">
+                        //     <div class="msg_sent">HAHA</div>    
+                        // </div>`
+                        get.appendChild(train);
+                    </script>
                 </div>
             </div>
 

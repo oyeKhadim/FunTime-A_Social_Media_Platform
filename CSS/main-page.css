@@ -176,8 +176,8 @@
     display: flex;
 }
 #msg_section{
-    display: flex;
-    flex-direction: column;
+    /* display: flex; */
+    /* flex-direction: column; */
     border: 2px solid #00afda;
     height: 90vh;
     border-radius: 10px;
@@ -209,9 +209,30 @@
     height: 70px;   
 }
 #msg_div{
+    border: 1px solid red;
+    height: 80%;
+    width: 100%;
+    padding: 5px 10px;
     display: flex;
     flex-direction: column-reverse;
 }
-.msg{
-    
+.msg_sent{
+    background-color: #00afda;
+    width: auto;
+    margin: 2px;
+    margin-left: auto;
+    padding:  6px 15px;
+    border-radius: 100px;
+}
+.msg_recieved{
+    background-color: #6ee2ff;
+    width: auto;
+    margin: 2px;
+    padding: 6px 15px;
+    border-radius: 100px;
+}
+.message{
+    display: flex;
+    display: flex;
+    width: 100%;
 }
