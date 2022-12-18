@@ -104,7 +104,7 @@ function addPosts() {
 
 		post.forEach((element) => {
 			let authorDp =
-					"https://uxwing.com/wp-content/themes/uxwing/download/peoples-avatars/no-profile-picture-icon.png",
+				"https://uxwing.com/wp-content/themes/uxwing/download/peoples-avatars/no-profile-picture-icon.png",
 				authorName = "Unknown";
 			const dbref = ref(db);
 			const author = ref(db, "Usernames/" + element.data.author);
@@ -350,7 +350,7 @@ view_friends_requests.onclick = () => {
 	let friendArr = [];
 	if (friendRequests.length > 0) friendArr = friendRequests.split(" ");
 	else {
-		extraFeatures.innerHTML += `<p >No Pending Requests</p>`;
+		extraFeatures.innerHTML += `<h5 >No Pending Requests</h5>`;
 	}
 	console.log(friendArr);
 	friendArr.forEach((element) => {
@@ -415,6 +415,11 @@ function ShowFriendCard(dp, name) {
 		</div>
 	</a>
 </div>`;
+	// Added this so when user clicks on the profile of his friend it will show his profile
+	let get = document.getElementById('person_card');
+	get.onclick = () => {
+		fun();		//Call function you call when someone search for username
+	}
 }
 
 //		Friends Requests
@@ -445,6 +450,11 @@ function ShowPersonCard(dp, name) {
 		
 	</div>
 </div>`;
+	// Added this so when user clicks on the profile of his friend it will show his profile
+	let get = document.getElementById('person_card');
+	get.onclick = () => {
+		fun();		//Call function you call when someone search for username
+	}
 }
 //   onfriend card click
 // let personCard = document.getElementById('btnn');
@@ -478,7 +488,7 @@ function ShowPersonCard(dp, name) {
 function fun() {
 	console.log("hi");
 	let extraFeatures = document.getElementById("extra-features");
-	extraFeatures.innerHTML += `<div id="userProfile">
+	extraFeatures.innerHTML = `<div id="userProfile">
 	<img id="userBanner" src="/Pngs/banner.jpg" alt="">
 	<img id="userProfilePic" src="/Pngs/pic.jpg" alt="">
 	<h4 id="fullname"><b> Abdul Mateen</b></h4>
