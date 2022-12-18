@@ -1,16 +1,21 @@
 #whole-screen {
+    
     display: flex;
-    justify-content: center;
-    margin-top: 5px;
+    justify-content: space-between;
+    margin-top: 10px;
 }
 
 #div-setting {
-    position: static;
     border: 1px solid grey;
+    box-shadow: 0 0 3px black;
+
     border-radius: 10px;
     width: 25%;
     margin: 0 5px;
     height: 100vh;
+}
+#div-setting:hover {
+    box-shadow: 0 0 8px black;
 }
 
 .setting-card {
@@ -57,20 +62,29 @@
 
 #main-timeline {
     margin: 0 3px;
-    width: 50%;
+    width: 40%;
     border: 1px solid grey;
     border-radius: 10px;
+    box-shadow: 0 0 3px black;
+}
+#main-timeline:hover{
+    box-shadow: 0 0 8px black;
+
 }
 
 #extra-features {
     margin: 0 3px;
-    border: 1px solid grey;
-    border-radius: 10px;
     width: 25%;
     padding: 5px;
     display: flex;
     flex-direction: column;
+    border: 1px solid grey;
+    border-radius: 10px;
+    box-shadow: 0 0 3px black;
     /* height: 100vh; */
+}
+#extra-features:hover{
+    box-shadow: 0 0 8px black;
 }
 
 #new-post {
@@ -179,11 +193,11 @@
     display: flex;
 }
 #msg_section{
+    position: fixed;
     display: flex;
+    margin-right: 10px;
     flex-direction: column;
     border: 2px solid #00afda;
-    /* height: 90vh; */
-    /* height: ; */
     border-radius: 10px;
 }
 #msg_top{
@@ -215,7 +229,7 @@
 #msg_div{
     border: 1px solid red;
     /* height: 60vh; */
-    max-height: 40vh;
+    max-height: 60vh;
     width: 100%;
     padding: 5px 10px;
     display: flex;
@@ -228,14 +242,14 @@
     margin: 2px;
     margin-left: auto;
     padding:  6px 15px;
-    border-radius: 100px;
+    border-radius: 20px;
 }
 .msg_recieved{
     background-color: #6ee2ff;
     width: auto;
     margin: 2px;
     padding: 6px 15px;
-    border-radius: 100px;
+    border-radius: 20px;
 }
 .message{
     display: flex;
@@ -254,4 +268,7 @@
 }
 #sendbtn{
     height: 40px;
+}
+.get{
+    /* position: 40px 40px; */
 }

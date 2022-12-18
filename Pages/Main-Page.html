@@ -13,7 +13,7 @@
 </head>
 
 <body>
-    <nav class="navbar navbar-expand-lg " style="background-color: #00afda; position: sticky;">
+    <nav class="navbar fixed-top navbar-expand-lg " style="background-color: #00afda; position: sticky;">
         <div class="container-fluid">
             <a class="navbar-brand fw-bold" href="/Pages/Main-Page.html">FunTime</a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarScroll"
@@ -44,7 +44,7 @@
         </div>
     </nav>
     <div id="whole-screen">
-        <!-- Pop up Menu -->
+        <!-- Pop up Menu -->        
         <div id="new-post-popup" class="popup">
             <h3>Create Post</h3>
             <textarea name="Caption" id="caption-area" cols=auto rows=auto placeholder="Add Caption"></textarea>
@@ -152,6 +152,11 @@
             }
             document.getElementById('textarea').value = null;
             get.scrollTop=get.scrollHeight;
+        }
+        window.onscroll=()=>{
+            console.log('hi')
+            let fer=document.getElementById('extra-features');
+            fer.classList+='get';
         }
     </script>
 
