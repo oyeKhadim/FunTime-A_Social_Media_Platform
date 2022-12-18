@@ -176,10 +176,11 @@
     display: flex;
 }
 #msg_section{
-    /* display: flex; */
-    /* flex-direction: column; */
+    display: flex;
+    flex-direction: column;
     border: 2px solid #00afda;
-    height: 90vh;
+    /* height: 90vh; */
+    /* height: ; */
     border-radius: 10px;
 }
 #msg_top{
@@ -214,7 +215,7 @@
     width: 100%;
     padding: 5px 10px;
     display: flex;
-    flex-direction: column-reverse;
+    flex-direction: column;
 }
 .msg_sent{
     background-color: #00afda;
@@ -235,4 +236,19 @@
     display: flex;
     display: flex;
     width: 100%;
+}
+#msg_input{
+    display: flex;
+    padding: 3px;
+}
+#textarea{
+    border-radius: 4px;
+    width: 100%;
+    /* display: none; */
+    overflow: hidden;
+    resize: none;
+    height: 100%;
+}
+#sendbtn{
+    height: 40px;
 }

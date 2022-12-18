@@ -109,36 +109,27 @@
                 </div>
                 <div id="msg_div">
                     <div class="message">
-                        <div class="msg_sent">or Projects!!!</div>
-                    </div>
-                    <div class="message">
-                        <div class="msg_sent">Finals ki tayari!!!</div>
-                    </div>
-                    <div class="message">
-                        <div class="msg_recieved">Allah Ka Shukar! Ap Bataen kia ho raha hai aj Kal?</div>
-                    </div>
-                    <div class="message">
-                        <div class="msg_sent">Kia Hal hai?</div>
+                        <div class="msg_recieved">Assalamualikum</div>
                     </div>
                     <div class="message">
                         <div class="msg_recieved">Wasalam</div>
                     </div>
                     <div class="message">
-                        <div class="msg_recieved">Assalamualikum</div>
+                        <div class="msg_sent">Kia Hal hai?</div>
                     </div>
-                    <script>
-                        let get = document.getElementById('msg_div');
-                        let train = document.createElement('div');
-                        train.classList+='message';
-                        let inn=document.createElement('div');
-                        inn.classList="msg_sent";
-                        inn.innerText="haha";
-                        train.appendChild(inn);
-                        // `<div class="message">
-                        //     <div class="msg_sent">HAHA</div>    
-                        // </div>`
-                        get.appendChild(train);
-                    </script>
+                    <div class="message">
+                        <div class="msg_recieved">Allah Ka Shukar! Ap Bataen kia ho raha hai aj Kal?</div>
+                    </div>
+                    <div class="message">
+                        <div class="msg_sent">Finals ki tayari!!!</div>
+                    </div>
+                    <div class="message">
+                        <div class="msg_sent">or Projects!!!</div>
+                    </div>
+                </div>
+                <div id="msg_input">
+                    <textarea name="" id="textarea" cols="1" rows="1" placeholder="Enter Msg"></textarea>
+                    <img src="/Pngs/sendbtn.png" id="sendbtn" alt="">
                 </div>
             </div>
 
@@ -147,7 +138,25 @@
     </div>
 
 
+    <script>
+        let pict = document.getElementById('sendbtn');
+        pict.onclick = () => {
+            let get = document.getElementById('msg_div');
+            let train = document.createElement('div');
+            train.classList += 'message';
+            let inn = document.createElement('div');
+            inn.classList = "msg_sent";
+            let el = document.getElementById('textarea');
+            if (el.value != "") {
+                inn.innerText = el.value;
+                train.appendChild(inn);
+                get.append(train);
+            }
+            document.getElementById('textarea').value = null;
+            get.firstChild(null);
+        }
 
+    </script>
 
 
 
