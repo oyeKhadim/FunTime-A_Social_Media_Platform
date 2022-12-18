@@ -214,11 +214,13 @@
 }
 #msg_div{
     border: 1px solid red;
-    height: 80%;
+    /* height: 60vh; */
+    max-height: 40vh;
     width: 100%;
     padding: 5px 10px;
     display: flex;
     flex-direction: column;
+    overflow-y: scroll;
 }
 .msg_sent{
     background-color: #00afda;
