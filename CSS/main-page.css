@@ -109,16 +109,19 @@
 }
 
 #caption-area {
-    border: none;
-    border-bottom: 1px solid grey;
+    border-radius: 4px;
+    width: 100%;
+    overflow: hidden;
+    resize: none;
 }
 
 #take-image {
     display: block;
 }
 
-#new-post-img {
-    width: 100%;
+#root canvas {
+    margin: 3px 0;
+    width: 36vw;
 }
 #person_card{
     width: auto;
@@ -244,10 +247,8 @@
 #textarea{
     border-radius: 4px;
     width: 100%;
-    /* display: none; */
     overflow: hidden;
     resize: none;
-    height: 100%;
 }
 #sendbtn{
     height: 40px;
