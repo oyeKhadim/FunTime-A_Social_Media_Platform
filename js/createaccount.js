@@ -12,11 +12,11 @@ showpassword.onclick = () => {
 	document.getElementById("repassword").type = "text";
 };
 function usernameValid(str) {
-        if(str.length<5){
-            return false;
-        }
-		return !str.includes(" ");
+	if (str.length < 5) {
+		return false;
 	}
+	return !str.includes(" ");
+}
 //<--------------------------------Bachy is code se door rahy--------------------------------------->
 
 //<------------------------------------Linking With DataBase---------------------------------------->
@@ -52,59 +52,60 @@ const db = getDatabase();
 
 let signup = document.getElementById("signup");
 signup.addEventListener("click", insertData);
-function insertData() {
+async function insertData() {
 	let user = document.getElementById("username").value;
 	const dbref = ref(db);
 	let flag = true;
-	get(child(dbref, "Usernames/" + user)).then((snapshot) => {
-		if (!snapshot.exists()) {
-			flag = false;
-		}
+	await new Promise((resolve) => {
+		get(child(dbref, "Usernames/" + user)).then((snapshot) => {
+			if (!snapshot.exists()) {
+				flag = false;
+			}
+			resolve();
+		});
 	});
+
 	let pass = document.getElementById("password").value;
 	let repass = document.getElementById("repassword").value;
-	setTimeout(() => {
-		if (pass == repass) {
-			if (usernameValid(user)) {
-				if (flag) {
-					alert("Username already Taken.");
-				} else {
+	if (pass == repass) {
+		if (usernameValid(user)) {
+			if (flag) {
+				alert("Username already Taken.");
+			} else {
+				await new Promise((resolve) => {
 					set(ref(db, "Usernames/" + username.value), {
+						username: username,
+						password: password,
+						fullName: "",
+						email: "",
+						bio: "",
+						imgurl:
+							"https://uxwing.com/wp-content/themes/uxwing/download/peoples-avatars/no-profile-picture-icon.png",
+						addFriendPrivacy: false,
+						showFriendPrivacy: false,
+						isVerified: false,
+						friends: "",
+						friendRequests: "",
+					});
+					resolve();
+				});
+				await new Promise((resolve) => {
+					set(ref(db, "loggedInuser/"), {
 						username: username.value,
 						password: password.value,
-					})
-						.then(() => {
-							alert("Data stored suxxessfully");
-						})
-						.catch((error) => {
-							alert("Error: " + error);
-						});
-						
-						set(ref(db, "loggedInuser/" ), {
-							username: username.value,
-							password:password.value,
-						
-						})
-							.then(() => {
-								alert("Data stored suxxessfully");
-							})
-							.catch((error) => {
-								alert("Error: " + error);
-							});
-						// open page
-						setTimeout(() => {
-							location.href = "../Pages/User-info.html";
-						}, 1000);
-				}
-			} else {
-				alert(
-					"Enter a Valid Username containing atleast 5 cahracters and With No Spaces."
-				);
+					});
+					resolve();
+				});
+					location.href = "../Pages/User-info.html";
 			}
 		} else {
-			alert("Password does not match.");
+			alert(
+				"Enter a Valid Username containing atleast 5 cahracters and With No Spaces."
+			);
 		}
-	}, 1000);
+	} else {
+		alert("Password does not match.");
+	}
 }
 
 // <-------------------------------------------Linking Ends Here------------------------------------------>

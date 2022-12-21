@@ -55,6 +55,7 @@ function SelectData() {
 	});
 }
 function storePostInDataBase() {
+	document.getElementById("posts_section").innerHTML = "";
 	let text = document.getElementById("caption-area");
 	let author = username;
 	let likes = 0;
@@ -77,7 +78,9 @@ function storePostInDataBase() {
 		});
 	postCount = postCount + 1;
 	updatevalues();
+	post_imgurl=undefined;
 	text.value = "";
+
 }
 function updatevalues() {
 	set(ref(db, "PostCount/" + username), {
@@ -102,15 +105,18 @@ function addPosts() {
 			});
 		});
 
-		post.forEach((element) => {
+		post.forEach(async (element) => {
 			let authorDp =
-				"https://uxwing.com/wp-content/themes/uxwing/download/peoples-avatars/no-profile-picture-icon.png",
+					"https://uxwing.com/wp-content/themes/uxwing/download/peoples-avatars/no-profile-picture-icon.png",
 				authorName = "Unknown";
 			const dbref = ref(db);
 			const author = ref(db, "Usernames/" + element.data.author);
-			onValue(author, (snapshot) => {
-				authorDp = snapshot.val().imgurl;
-				authorName = snapshot.val().fullName;
+			await new Promise((resolve) => {
+				onValue(author, (snapshot) => {
+					authorDp = snapshot.val().imgurl;
+					authorName = snapshot.val().fullName;
+					resolve();
+				});
 			});
 
 			let postImgurl = element.data.imgurl,
@@ -118,19 +124,19 @@ function addPosts() {
 				text = element.data.text,
 				noOfLikes = element.data.likes,
 				noOfDislikes = element.data.dislikes,
-				noOfComments = element.data.comments;
-			setTimeout(() => {
-				insertpost(
-					authorDp,
-					authorName,
-					date, //"06:37 AM , 2 Dec",
-					postImgurl,
-					text, //"Coming Soon...",
-					noOfLikes, //37,
-					noOfDislikes, //2,
-					noOfComments //58
-				);
-			}, 1000);
+				noOfComments = element.data.comments,
+				id = element.name;
+			insertpost(
+				authorDp,
+				authorName,
+				date, //"06:37 AM , 2 Dec",
+				postImgurl,
+				text, //"Coming Soon...",
+				noOfLikes, //37,
+				noOfDislikes, //2,
+				noOfComments, //58
+				id
+			);
 		});
 	});
 }
@@ -160,8 +166,6 @@ input.onchange = function (ev) {
 				// Handle the compressed image. es. upload or save in local state
 				//console.log(blob);
 				imageUploaded(blob);
-				displayInfo("Original file", file);
-				displayInfo("Compressed file", blob);
 			},
 			MIME_TYPE,
 			QUALITY
@@ -191,20 +195,6 @@ function calculateSize(img, maxWidth, maxHeight) {
 }
 // Utility functions for demo purpose
 //this funtion will be removed later
-
-function displayInfo(label, file) {
-	const p = document.createElement("p");
-	p.innerText = `${label} - ${readableBytes(file.size)}`;
-
-	document.getElementById("root").append(p);
-}
-
-function readableBytes(bytes) {
-	const i = Math.floor(Math.log(bytes) / Math.log(1024)),
-		sizes = ["B", "KB", "MB", "GB", "TB", "PB", "EB", "ZB", "YB"];
-
-	return (bytes / Math.pow(1024, i)).toFixed(2) + " " + sizes[i];
-}
 let base64String = "";
 
 function imageUploaded(myfile) {
@@ -221,23 +211,22 @@ function imageUploaded(myfile) {
 	reader.readAsDataURL(file);
 }
 
-window.onload = () => {
+window.onload = async () => {
 	const dbref = ref(db);
 	const loggedinuser = ref(db, "loggedInuser/");
 	onValue(loggedinuser, (snapshot) => {
 		username = snapshot.val().username;
 	});
 
-	setTimeout(() => {
-		get(child(dbref, "PostCount/" + username)).then((snapshot) => {
-			if (snapshot.exists()) {
-				postCount = snapshot.val().postCount;
-				console.log("post count : " + postCount);
-			}
-		});
-		SelectData();
-	}, 2000);
-	setTimeout(addPosts(), 1000);
+	await get(child(dbref, "PostCount/" + username)).then((snapshot) => {
+		if (snapshot.exists()) {
+			postCount = snapshot.val().postCount;
+			console.log("post count : " + postCount);
+		}
+	});
+	SelectData();
+
+	addPosts();
 };
 let search_btn = document.getElementById("search_btn");
 let search_input = document.getElementById("search_input");
@@ -416,12 +405,12 @@ function ShowFriendCard(dp, name) {
 	</a>
 </div>`;
 	// Added this so when user clicks on the profile of his friend it will show his profile
-	let get = document.getElementById('person_card');
+	let get = document.getElementById("person_card");
 	get.onclick = () => {
-		showSearchedUser(dp,name,'n','@','cool',true,'id');			
+		showSearchedUser(dp, name, "n", "@", "cool", true, "id");
 		//Call function you call when someone search for username
 		// complete this by matching the user name with the data on db
-	}
+	};
 }
 
 //		Friends Requests
@@ -453,11 +442,11 @@ function ShowPersonCard(dp, name) {
 	</div>
 </div>`;
 	// Added this so when user clicks on the profile of his friend it will show his profile
-	let get = document.getElementById('person_card');
+	let get = document.getElementById("person_card");
 	get.onclick = () => {
-		showSearchedUser(dp,name,'n','@','cool',true,'id');		
+		showSearchedUser(dp, name, "n", "@", "cool", true, "id");
 		//Call function you call when someone search for Username    // i changed so you do not have to
-	}
+	};
 }
 //   onfriend card click
 // let personCard = document.getElementById('btnn');
@@ -505,7 +494,7 @@ notiBtn.onclick = () => {
 
 //	/	/	/	/	/	/	/	/	/	/	/	/
 
-function insertpost(dp, name, date, img, text, likes, dislikes, comments) {
+function insertpost(dp, name, date, img, text, likes, dislikes, comments, id) {
 	let train = `<div class="post" >
         <div class="post-details">
             <img src=${dp} class="profile_pic"
@@ -515,9 +504,9 @@ function insertpost(dp, name, date, img, text, likes, dislikes, comments) {
                 <p>${date}</p>
             </div>
         </div>
-        <div class="post-data">
+        <div class="post-data" >
             <p>${text}</p>
-            <img src=${img}
+            <img src=${img} ondblclick="likePost(${id})"
                 alt="">
 
         </div>
@@ -528,8 +517,8 @@ function insertpost(dp, name, date, img, text, likes, dislikes, comments) {
                 <p style="margin-left: auto;">${comments} Comments</p>
             </div>
             <div class="reaction-option">
-                <div class="love-reaction">
-                    <img id="unlikedbtn" src="/Pngs/heart-unlike.png" alt="">
+                <div class="love-reaction" onclick="likePost(${id})">
+                    <img id="${id}" src="/Pngs/heart-unlike.png" alt="">
                     <p>Love</p>
                 </div>
                 <div class="comment-section">
@@ -541,12 +530,12 @@ function insertpost(dp, name, date, img, text, likes, dislikes, comments) {
     </ > `;
 	// Solve this error
 	document.getElementById("posts_section").innerHTML += train;
-	let gt= document.getElementById('unlikedbtn');
+	// let gt = document.getElementById(id);
 	// gt.addEventListener('click',ge());
-	gt.onclick=(element)=>{
-		
-		console.log('hiii')
-		gt.src='/Pngs/heart-liked.png';
-	}
-		
+	// gt.onclick = (element) => {
+	// 	console.log("hiii");
+	// 	console.log(element)
+	// 	element.src = "/Pngs/heart-liked.png";
+	// };
 }
+

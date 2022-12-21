@@ -2,7 +2,8 @@ const MAX_WIDTH = 320;
 const MAX_HEIGHT = 180;
 const MIME_TYPE = "image/jpeg";
 const QUALITY = 0.7;
-let imgurl;
+let imgurl =
+	"https://uxwing.com/wp-content/themes/uxwing/download/peoples-avatars/no-profile-picture-icon.png";
 
 const input = document.getElementById("img-input");
 input.onchange = function (ev) {
@@ -88,7 +89,6 @@ function imageUploaded(myfile) {
 	reader.readAsDataURL(file);
 }
 
-
 //<--------------------------------Bachy is code se door rahy--------------------------------------->
 
 //<------------------------------------Linking With DataBase---------------------------------------->
@@ -124,22 +124,24 @@ const db = getDatabase();
 
 let addDetail = document.getElementById("detail_enterd");
 addDetail.addEventListener("click", insertDetails);
-function insertDetails() {
+async function insertDetails() {
 	const dbref = ref(db);
 	let username = "123";
 	let password = "invalid";
-	get(child(dbref, "loggedInuser/")).then((snapshot) => {
-		if (snapshot.exists()) {
-			username = snapshot.val().username;
-			password = snapshot.val().password;
-			console.log(username);
-		}
+	await new Promise((resolve) => {
+		get(child(dbref, "loggedInuser/")).then((snapshot) => {
+			if (snapshot.exists()) {
+				username = snapshot.val().username;
+				password = snapshot.val().password;
+			}
+			resolve();
+		});
 	});
-	setTimeout(() => {
-		let name = document.getElementById("name").value;
-		let email = document.getElementById("email").value;
-		let bio = document.getElementById("bio").value;
-		console.log(imgurl)
+	let name = document.getElementById("name").value;
+	let email = document.getElementById("email").value;
+	let bio = document.getElementById("bio").value;
+	console.log(imgurl);
+	await new Promise((resolve) => {
 		set(ref(db, "Usernames/" + username), {
 			username: username,
 			password: password,
@@ -150,22 +152,19 @@ function insertDetails() {
 			addFriendPrivacy: false,
 			showFriendPrivacy: false,
 			isVerified: false,
-			friends:"",
-			friendRequests:"",
-		})
-			.then(() => {
-				alert("Details stored suxxessfully");
-			})
-			.catch((error) => {
-				alert("Error: " + error);
-			});
-			set(ref(db, "PostCount/" + username), {
-				postCount: 0,
-			});
-		setTimeout(() => {
-			location.href = "main-page.html";
-		}, 1000);
-	}, 2000);
+			friends: "",
+			friendRequests: "",
+		});
+		resolve();
+	});
+	await new Promise((resolve) => {
+		set(ref(db, "PostCount/" + username), {
+			postCount: 0,
+		});
+		resolve();
+	});
+
+	location.href = "main-page.html";
 }
 
 // <-------------------------------------------Linking Ends Here------------------------------------------>

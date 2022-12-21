@@ -51,8 +51,6 @@ var password = document.getElementById("password");
 
 function SelectData() {
 	const dbref = ref(db);
-
-	// setTimeout(()=>{},1000)
 	get(child(dbref, "Usernames/" + username.value)).then((snapshot) => {
 		if (snapshot.exists()) {
 			if(username.value == snapshot.val().username&&
@@ -78,60 +76,9 @@ function SelectData() {
 			alert("No Data Found");
 		}
 	});
-	
-    
-}
-function checking() {
-	const dbref = ref(db);
-	const khadim=child(dbref,'Usernames');
-	//update just one entry
-	// let count=""
-	// get(khadim).then((snapshot)=>{
-	// 	count=snapshot.val().postCount;
-	// 	count += "123";
-	// })
-	// setTimeout(()=>{
-	// 	update(khadim,{postCount:count})
-
-	// },1000)
-	
-
-	//loop
-	// once(khadim,snap=>{
-	// 	snap.forEach(eventSnap => {
-	// 		console.log(eventSnap);
-	// 	});
-	// })
-// 	const mostViewedPosts = query(
-// 		ref(db, "PostCount"),
-// 		orderByChild("PostCount")
-// 	);
-// console.log(mostViewedPosts)
-
-
-// Retrive Posts
-// const Posts = ref(db, "Posts/");
-// onValue(Posts, (snapshot) => {
-// 	const data = snapshot.val();
-// 	let post = [];
-// 	Object.keys(data).forEach((key) => {
-// 		post.push({
-// 			name: key,
-// 			data: data[key],
-// 		});
-// 	});
-
-// 	post.forEach((element) => {
-// 		console.log(element.data);
-// 	});
-// });
-
-
-
 }
 var signinbtn = document.getElementById("signinbtn");
 signinbtn.addEventListener("click", SelectData);
-// signinbtn.addEventListener('click',checking);
 
 
 // <-------------------------------------------Linking Ends Here------------------------------------------>
