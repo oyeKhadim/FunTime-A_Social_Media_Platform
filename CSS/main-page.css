@@ -1,3 +1,7 @@
+body{
+    margin: 0;
+    padding: 0;
+}
 #whole-screen {
     
     display: flex;
@@ -81,7 +85,7 @@
     border: 1px solid grey;
     border-radius: 10px;
     box-shadow: 0 0 3px black;
-    /* height: 100vh; */
+    height: 100vh;
 }
 #extra-features:hover{
     box-shadow: 0 0 8px black;
@@ -193,7 +197,7 @@
     display: flex;
 }
 #msg_section{
-    position: fixed;
+    height: 90vh;
     display: flex;
     margin-right: 10px;
     flex-direction: column;
@@ -202,14 +206,14 @@
 }
 #msg_top{
     align-items: center;
-    width: 100%;
+    width: auto;
     height: 70px;
     background-color: #b4eefd;
     color: black;
     display: flex;
     padding: 5px;
-    border-top-left-radius: 10px;
-    border-top-right-radius: 10px;
+    border-top-left-radius: 8px;
+    border-top-right-radius: 8px;
 }
 #logout{
     color: red;
@@ -227,10 +231,7 @@
     height: 70px;   
 }
 #msg_div{
-    border: 1px solid red;
-    /* height: 60vh; */
-    max-height: 60vh;
-    width: 100%;
+    height: 100%;
     padding: 5px 10px;
     display: flex;
     flex-direction: column;
@@ -268,4 +269,19 @@
 }
 #sendbtn{
     height: 40px;
+}
+#screen_div{
+    display: flex;
+    height: 91vh;
+}
+#msgs_contact{
+    overflow-y: scroll;
+    width: 30%;
+    margin-right: 10px;
+    border: 1px solid gray;
+}
+
+#msgs_details{
+    margin-top: 5px;
+    width: 70%;
 }
