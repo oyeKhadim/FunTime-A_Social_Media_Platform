@@ -108,42 +108,6 @@
     </div>
     </div>
 
-
-    <script >
-
-    function likePost(post) {
-        if(post.src== "http://127.0.0.1:5500/Pngs/heart-liked.png"){
-            post.src= "/Pngs/heart-unlike.png";
-            return;
-        }
-        post.src = "/Pngs/heart-liked.png";
-    }
-
-
-        let pict = document.getElementById('sendbtn');
-        pict.onclick = () => {
-            let get = document.getElementById('msg_div');
-            let train = document.createElement('div');
-            train.classList += 'message';
-            let inn = document.createElement('div');
-            inn.classList = "msg_sent";
-            let el = document.getElementById('textarea');
-            if (el.value != "") {
-                inn.innerText = el.value;
-                train.appendChild(inn);
-                get.append(train);
-            }
-            document.getElementById('textarea').value = null;
-            get.scrollTop=get.scrollHeight;
-        }
-    </script>
-
-
-
-
-
-
-
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
     <script type="module" src="/js/main-page.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>

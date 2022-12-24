@@ -44,7 +44,7 @@ import {
 const db = getDatabase();
 
 function SelectData() {
-	console.log("Dp values Assigend" + username);
+	// console.log("Dp values Assigend" + username);
 	const dbref = ref(db);
 	get(child(dbref, "Usernames/" + username)).then((snapshot) => {
 		if (snapshot.exists()) {
@@ -78,9 +78,8 @@ function storePostInDataBase() {
 		});
 	postCount = postCount + 1;
 	updatevalues();
-	post_imgurl=undefined;
+	post_imgurl = undefined;
 	text.value = "";
-
 }
 function updatevalues() {
 	set(ref(db, "PostCount/" + username), {
@@ -151,7 +150,7 @@ input.onchange = function (ev) {
 	img.onerror = function () {
 		URL.revokeObjectURL(this.src);
 		// Handle the failure properly
-		console.log("Cannot load image");
+		// console.log("Cannot load image");
 	};
 	img.onload = function () {
 		URL.revokeObjectURL(this.src);
@@ -201,7 +200,6 @@ function imageUploaded(myfile) {
 	var file = myfile;
 
 	var reader = new FileReader();
-	console.log("next");
 
 	reader.onload = function () {
 		base64String = reader.result.replace("data:", "").replace(/^.+,/, "");
@@ -221,7 +219,6 @@ window.onload = async () => {
 	await get(child(dbref, "PostCount/" + username)).then((snapshot) => {
 		if (snapshot.exists()) {
 			postCount = snapshot.val().postCount;
-			console.log("post count : " + postCount);
 		}
 	});
 	SelectData();
@@ -232,7 +229,6 @@ let search_btn = document.getElementById("search_btn");
 let search_input = document.getElementById("search_input");
 search_btn.onclick = () => {
 	let searchUsername = search_input.value;
-	console.log(searchUsername.length);
 	if (searchUsername.length > 0) {
 		const searchedUser = ref(db, "Usernames/" + searchUsername);
 		onValue(searchedUser, (snapshot) => {
@@ -300,14 +296,9 @@ function showSearchedUser(
                 </div>`;
 
 	document.getElementById("extra-features").innerHTML = train;
-	let get = document.getElementById(id);
-	get.onclick = () => {
-		addFriend();
-	};
+	
 }
-function addFriend() {
-	console.log("data");
-}
+
 let view_friends = document.getElementById("view_friends");
 view_friends.onclick = () => {
 	let extraFeatures = document.getElementById("extra-features");
@@ -319,7 +310,6 @@ view_friends.onclick = () => {
 	});
 	let friendArr = [];
 	if (friends.length > 0) friendArr = friends.split(" ");
-	console.log(friendArr);
 	friendArr.forEach((element) => {
 		const friendRef2 = ref(db, "Usernames/" + element);
 		onValue(friendRef2, (snapshot) => {
@@ -341,7 +331,6 @@ view_friends_requests.onclick = () => {
 	else {
 		extraFeatures.innerHTML += `<h5 >No Pending Requests</h5>`;
 	}
-	console.log(friendArr);
 	friendArr.forEach((element) => {
 		const friendRef2 = ref(db, "Usernames/" + element);
 		onValue(friendRef2, (snapshot) => {
@@ -518,7 +507,7 @@ function insertpost(dp, name, date, img, text, likes, dislikes, comments, id) {
             </div>
             <div class="reaction-option">
                 <div class="love-reaction" onclick="likePost(${id})">
-                    <img id="${id}" src="/Pngs/heart-unlike.png" alt="">
+                    <img id="${id}" src="/Pngs/heart-unlike.png"  alt="">
                     <p>Love</p>
                 </div>
                 <div class="comment-section">
@@ -538,4 +527,11 @@ function insertpost(dp, name, date, img, text, likes, dislikes, comments, id) {
 	// 	element.src = "/Pngs/heart-liked.png";
 	// };
 }
-
+window.likePost = function likePost(post) {
+	// console.log(post.src);
+	if (post.src == "http://127.0.0.1:5501/Pngs/heart-liked.png") {
+		post.src = "/Pngs/heart-unlike.png";
+		return;
+	}
+	post.src = "/Pngs/heart-liked.png";
+};
