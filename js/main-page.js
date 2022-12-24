@@ -503,7 +503,6 @@ function insertpost(dp, name, date, img, text, likes, dislikes, comments, id) {
             <div class="reaction-section-details">
                 <p>${likes} Likes</p>
                 <p>${dislikes} Dislikes</p>
-                <p style="margin-left: auto;">${comments} Comments</p>
             </div>
             <div class="reaction-option">
                 <div class="love-reaction" onclick="likePost(${id})">
@@ -511,8 +510,8 @@ function insertpost(dp, name, date, img, text, likes, dislikes, comments, id) {
                     <p>Love</p>
                 </div>
                 <div class="comment-section">
-                    <img src="/Pngs/commentpng.png" alt="">
-                    <p>Comments</p>
+                    <img src="/Pngs/dislike_btn.png" alt="">
+                    <p>Dislike</p>
                 </div>
             </div>
         </div>
