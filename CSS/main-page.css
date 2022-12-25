@@ -240,6 +240,7 @@ body{
 .msg_sent{
     background-color: #00afda;
     width: auto;
+    max-width: 70%;
     margin: 2px;
     margin-left: auto;
     padding:  6px 15px;
@@ -247,13 +248,13 @@ body{
 }
 .msg_recieved{
     background-color: #6ee2ff;
+    max-width: 70%;
     width: auto;
     margin: 2px;
     padding: 6px 15px;
     border-radius: 20px;
 }
 .message{
-    display: flex;
     display: flex;
     width: 100%;
 }
