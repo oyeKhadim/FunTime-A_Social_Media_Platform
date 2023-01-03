@@ -31,6 +31,7 @@
         }
 
         .btn {
+            cursor: pointer;
             color: rgb(9, 0, 171);
             font-size: 30px;
             margin: 0 10px;
@@ -40,7 +41,8 @@
             padding: 5px 10px;
             transition: all .15s ease-in-out;
         }
-        .btn:hover{
+
+        .btn:hover {
             border: 1px solid white;
             border-radius: 25px;
             background-color: white;
@@ -49,19 +51,17 @@
             margin: 0 12px;
         }
     </style>
+    <script src="/js/index.js"></script>
 </head>
 
 <body>
     <div id="main">
         <div id="top_bar">
-            <div id="signup" class="btn">Sign Up</div>
-            <div id="signin" class="btn">Sign In</div>
+            <div onclick="signup_page()" id="signup" class="btn">Sign Up</div>
+            <div onclick="login_page()" id="signin" class="btn">Sign In</div>
         </div>
     </div>
 
-    <script>
-
-    </script>
 </body>
 
 </html>
