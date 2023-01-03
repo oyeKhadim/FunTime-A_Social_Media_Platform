@@ -23,6 +23,7 @@ body{
 }
 
 .setting-card {
+    cursor: pointer;
     margin: 3px 5px;
     border: 2px solid #00afda;
     background-color: white;
@@ -157,7 +158,25 @@ body{
     /* align-items: center; */
     justify-content: center;
 }
-#declineRequest{
+.accept_request {
+    cursor: pointer;
+    text-align: center;
+    margin: 3px 5px;
+    border: 2px solid #00afda;
+    background-color: white;
+    border-radius: 100px;
+    padding: 8px 10px;
+}
+
+.accept_request:hover {
+    background-color: #b4eefd;
+    border: 2px solid #b4eefd;
+
+}
+.declineRequest{
+    cursor: pointer;
+
+    text-align: center;
     color: red;
     margin: 3px 5px;
     border: 2px solid #ff0000;
@@ -165,7 +184,7 @@ body{
     border-radius: 100px;
     padding: 8px 10px;
 }
-#declineRequest:hover{
+.declineRequest:hover{
     background-color: red;
     color: white;
 }

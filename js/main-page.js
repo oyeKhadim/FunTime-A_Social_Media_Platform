@@ -514,8 +514,8 @@ function ShowPersonCard(dp, name, username) {
 		</div>
 	</a>
 	<div id="add_friend" class="flex-row">
-		<div id="${username}" onclick="acceptRequest(${username})" class="setting-card" style="width: 50%;">Accept</div>
-		<div id="${username}"  onclick="rejectRequest(${username}) style="width: 50%">Reject</div>
+		<div id="${username}" onclick="acceptRequest(${username})" class="accept_request" style="width: 50%;">Accept</div>
+		<div id="${username}"  onclick="rejectRequest(${username})" class="declineRequest" style="width: 50%">Reject</div>
 		
 	</div>
 </div>`;
