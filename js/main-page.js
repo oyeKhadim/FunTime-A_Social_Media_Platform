@@ -61,9 +61,9 @@ function newMessage() {
 	if (messageRead == false) {
 		console.log("Unread Messages");
 		//write code to make it visible like their are unviewed messages
-
+		document.getElementById('unread_msgs').classList+="color_red";
 	} else {
-		
+		document.getElementById('unread_msgs').classList-="color_red";
 	}
 }
 function storePostInDataBase() {
@@ -125,7 +125,7 @@ function addPosts() {
 		// console.log(post);
 		post.forEach(async (element) => {
 			let authorDp =
-					"https://uxwing.com/wp-content/themes/uxwing/download/peoples-avatars/no-profile-picture-icon.png",
+				"https://uxwing.com/wp-content/themes/uxwing/download/peoples-avatars/no-profile-picture-icon.png",
 				authorName = "Unknown";
 
 			const author = ref(db, "Usernames/" + element.data.author);
