@@ -541,12 +541,12 @@ window.rejectRequest = async function (user) {
 	friendRequests = friendRequests.replace(requestedUsername, "");
 	friendRequests = friendRequests.replace("  ", " ");
 	friendRequests = friendRequests.trim();
-	if (friends.length > 0) friends += " ";
-	friends += requestedUsername;
 	//console.log(username + "  " + friendRequests);
 	await update(child(dbref, "Usernames/" + username), {
 		friendRequests: friendRequests,
 	});
+	viewFriendsRequests();
+
 };
 window.acceptRequest = async function (user) {
 	let requestedUsername = user[0].id;
