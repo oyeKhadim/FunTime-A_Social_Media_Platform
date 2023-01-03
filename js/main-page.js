@@ -61,7 +61,9 @@ function newMessage() {
 	if (messageRead == false) {
 		console.log("Unread Messages");
 		//write code to make it visible like their are unviewed messages
+
 	} else {
+		
 	}
 }
 function storePostInDataBase() {
@@ -400,7 +402,7 @@ view_friends.onclick = () => {
 		friends = snapshot.val().friends;
 	});
 	let friendArr = [];
-	if (friends.length > 0) friendArr = friends.split(" ");
+	if (friends.length > 0) friendArr = friends.trim().split(" ");
 	friendArr.forEach((element) => {
 		const friendRef2 = ref(db, "Usernames/" + element);
 		onValue(friendRef2, (snapshot) => {
@@ -583,7 +585,9 @@ window.acceptRequest = async function (user) {
 			resolve();
 		});
 	});
+	friends = friends.trim();
 	if (friends.length > 0) friends += " ";
+	friends = friends.replace("  ", " ");
 	friends += username;
 	await update(child(dbref, "Usernames/" + requestedUsername), {
 		friends: friends,
