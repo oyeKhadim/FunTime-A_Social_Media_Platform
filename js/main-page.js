@@ -1,7 +1,8 @@
 let username = "123",
 	postCount = 0,
 	fullName,
-	imgurl;
+	imgurl,
+	messageRead = true;
 let checkDataLoaded = false;
 //---------------------------------------Post picture Compressing----------------------------------------
 const MAX_WIDTH = 1280;
@@ -51,8 +52,17 @@ async function SelectData() {
 			imgurl = snapshot.val().imgurl;
 			document.getElementById("profile_pic").src = imgurl;
 			document.getElementById("profile_pic_createPost").src = imgurl;
+			messageRead = snapshot.val().messagesRead;
 		}
 	});
+	newMessage();
+}
+function newMessage() {
+	if (messageRead == false) {
+		console.log("Unread Messages");
+		//write code to make it visible like their are unviewed messages
+	} else {
+	}
 }
 function storePostInDataBase() {
 	document.getElementById("posts_section").innerHTML = "";
@@ -61,7 +71,13 @@ function storePostInDataBase() {
 	let likes = "";
 	let dislikes = "";
 	let comments = "";
-	let date = new Date();
+
+	let date1 = new Date();
+	let date = date1.toDateString();
+	// let day=date1.getDate();
+	// let month=date1.getMonth();
+	// let year=date1.getFullYear();
+	// let date= day+month+year
 	set(ref(db, "Posts/" + author + postCount), {
 		text: text.value,
 		imgurl: post_imgurl,
@@ -69,6 +85,7 @@ function storePostInDataBase() {
 		likes: likes,
 		dislikes: dislikes,
 		comments: comments,
+		date: date,
 	})
 		.then(() => {
 			alert("Data stored suxxessfully");
@@ -103,7 +120,7 @@ function addPosts() {
 				data: data[key],
 			});
 		});
-		console.log(post);
+		// console.log(post);
 		post.forEach(async (element) => {
 			let authorDp =
 					"https://uxwing.com/wp-content/themes/uxwing/download/peoples-avatars/no-profile-picture-icon.png",
@@ -112,17 +129,30 @@ function addPosts() {
 			const author = ref(db, "Usernames/" + element.data.author);
 			await new Promise((resolve) => {
 				onValue(author, (snapshot) => {
-					authorDp = snapshot.val().imgurl;
-					authorName = snapshot.val().fullName;
+					if (snapshot.exists()) {
+						authorDp = snapshot.val().imgurl;
+						authorName = snapshot.val().fullName;
+					}
 					resolve();
 				});
 			});
-			let likes = element.data.likes.split(" ").length - 1;
+			let likeBtnPicSrc = "/Pngs/heart-unlike.png";
+			// console.log(element.data.likes+"  "+username);
+			if (element.data.likes.includes(username)) {
+				likeBtnPicSrc = "/Pngs/heart-liked.png";
+			}
+			let likes = 0;
+			if (element.data.likes.length > 0) {
+				likes = element.data.likes.trim().split(" ").length;
+			}
 			if (likes < 0) likes = 0;
-			let dislikes = element.data.dislikes.split(" ").length - 1;
+			let dislikes = 0;
+			if (element.data.dislikes.length > 0) {
+				dislikes = element.data.dislikes.trim().split(" ").length;
+			}
 			if (dislikes < 0) dislikes = 0;
 			let postImgurl = element.data.imgurl,
-				date = "06:37 AM , 2 Dec",
+				date = element.data.date,
 				text = element.data.text,
 				noOfLikes = likes,
 				noOfDislikes = dislikes,
@@ -137,7 +167,8 @@ function addPosts() {
 				noOfLikes, //37,
 				noOfDislikes, //2,
 				noOfComments, //58
-				id
+				id,
+				likeBtnPicSrc
 			);
 		});
 	});
@@ -214,19 +245,25 @@ function imageUploaded(myfile) {
 
 const dbref = ref(db);
 window.onload = async () => {
-	const loggedinuser = ref(db, "loggedInuser/");
-	onValue(loggedinuser, (snapshot) => {
-		username = snapshot.val().username;
-	});
+	// const loggedinuser = ref(db, "loggedInuser/");
 
-	await get(child(dbref, "PostCount/" + username)).then((snapshot) => {
+	// onValue(loggedinuser, (snapshot) => {
+	// 	username = snapshot.val().username;
+	// });
+	await get(child(dbref, "loggedInuser/")).then((snapshot) => {
+		if (snapshot.exists()) {
+			username = snapshot.val().username;
+		}
+	});
+	get(child(dbref, "PostCount/" + username)).then((snapshot) => {
 		if (snapshot.exists()) {
 			postCount = snapshot.val().postCount;
 		}
 	});
+
 	SelectData();
 
-	//addPosts();
+	addPosts();
 };
 let search_btn = document.getElementById("search_btn");
 let search_input = document.getElementById("search_input");
@@ -488,29 +525,28 @@ function ShowPersonCard(dp, name, username) {
 	// };
 }
 window.rejectRequest = async function (user) {
-		let requestedUsername = user[0].id;
-		console.log(requestedUsername);
+	let requestedUsername = user[0].id;
+	console.log(requestedUsername);
 
-		let friendRef = ref(db, "Usernames/" + username);
-		let friendRequests = "";
-		await new Promise((resolve, reject) => {
-			onValue(friendRef, (snapshot) => {
-				friendRequests = snapshot.val().friendRequests;
-				resolve();
-			});
+	let friendRef = ref(db, "Usernames/" + username);
+	let friendRequests = "";
+	await new Promise((resolve, reject) => {
+		onValue(friendRef, (snapshot) => {
+			friendRequests = snapshot.val().friendRequests;
+			resolve();
 		});
-		//jugad it should be friendRequests= friendRequests.replace(username+" ", "");
-		//possible error : mateen and mateen123 can be  different useranmes
-		friendRequests = friendRequests.replace(requestedUsername, "");
-		friendRequests = friendRequests.replace("  ", " ");
-		friendRequests = friendRequests.trim();
-		if (friends.length > 0) friends += " ";
-		friends += requestedUsername;
-		//console.log(username + "  " + friendRequests);
-		await update(child(dbref, "Usernames/" + username), {
-			friendRequests: friendRequests,
-		});
-
+	});
+	//jugad it should be friendRequests= friendRequests.replace(username+" ", "");
+	//possible error : mateen and mateen123 can be  different useranmes
+	friendRequests = friendRequests.replace(requestedUsername, "");
+	friendRequests = friendRequests.replace("  ", " ");
+	friendRequests = friendRequests.trim();
+	if (friends.length > 0) friends += " ";
+	friends += requestedUsername;
+	//console.log(username + "  " + friendRequests);
+	await update(child(dbref, "Usernames/" + username), {
+		friendRequests: friendRequests,
+	});
 };
 window.acceptRequest = async function (user) {
 	let requestedUsername = user[0].id;
@@ -555,7 +591,6 @@ window.acceptRequest = async function (user) {
 
 	//code
 	viewFriendsRequests();
-
 };
 //   onfriend card click
 // let personCard = document.getElementById('btnn');
@@ -603,7 +638,18 @@ notiBtn.onclick = () => {
 
 //	/	/	/	/	/	/	/	/	/	/	/	/
 
-function insertpost(dp, name, date, img, text, likes, dislikes, comments, id) {
+function insertpost(
+	dp,
+	name,
+	date,
+	img,
+	text,
+	likes,
+	dislikes,
+	comments,
+	id,
+	likeBtnPicSrc
+) {
 	let train = `<div class="post" >
         <div class="post-details">
             <img src=${dp} class="profile_pic"
@@ -626,7 +672,7 @@ function insertpost(dp, name, date, img, text, likes, dislikes, comments, id) {
             </div>
             <div class="reaction-option">
                 <div class="love-reaction" onclick="likePost(${id})">
-                    <img id="${id}" src="/Pngs/heart-unlike.png"  alt="">
+                    <img id="${id}" src="${likeBtnPicSrc}"  alt="">
                     <p>Love</p>
                 </div>
                 <div class="comment-section">
@@ -640,7 +686,11 @@ function insertpost(dp, name, date, img, text, likes, dislikes, comments, id) {
 }
 window.likePost = async function likePost(post) {
 	console.log(post);
-	// let id = post.id;
+	let id = post.id;
+	if (id === undefined) {
+		id = post[0].id;
+		post = post[0];
+	}
 	// let posts = [];
 	// Object.keys(post).forEach((key) => {
 	// 	posts.push({
@@ -650,34 +700,41 @@ window.likePost = async function likePost(post) {
 	// });
 	// console.log(posts);
 
-	// let likes = "12";
-	// console.log(id);
-	// await get(child(dbref, "Posts/" + id)).then((snapshot) => {
-	// 	if (snapshot.exists()) {
-	// 		likes = snapshot.val().likes;
-	// 	}else{
-	// 		likes="";
-	// 	}
-	// });
-	// console.log(likes);
+	let likes = "12";
+	console.log(id);
+	let Ref = ref(db, "Posts/" + id);
+	await new Promise((resolve) => {
+		onValue(Ref, (snapshot) => {
+			if (snapshot.exists()) {
+				likes = snapshot.val().likes;
+			}
+			resolve();
+		});
+	});
 
-	// if (likes.includes(username)) {
-	// 	likes = likes.replace(username, "");
-	// 	post.src = "/Pngs/heart-unlike.png";
-	// } else {
-	// 	likes += username + " ";
-	// 	post.src = "/Pngs/heart-liked.png";
-	// }
-	// await update(child(dbref, "Posts/" + id), {
-	// 	likes: likes,
-	// });
-	// post=null;
-	// let count=likes.length;
-	// document.getElementById(id+"likes").innerHTML=count+" Likes";
-
-	if (post.src == "http://127.0.0.1:5501/Pngs/heart-liked.png") {
+	if (likes.includes(username)) {
+		likes = likes.replace(username + " ", "");
 		post.src = "/Pngs/heart-unlike.png";
-		return;
+	} else {
+		likes += username + " ";
+		post.src = "/Pngs/heart-liked.png";
 	}
-	post.src = "/Pngs/heart-liked.png";
+	updateLikes(likes, id);
+
+	// if (post.src == "http://127.0.0.1:5501/Pngs/heart-liked.png") {
+	// 	post.src = "/Pngs/heart-unlike.png";
+	// 	return;
+	// }
+	// post.src = "/Pngs/heart-liked.png";
 };
+function updateLikes(likes, id) {
+	update(ref(db, "Posts/" + id), {
+		likes: likes,
+	});
+	console.log(likes);
+
+	let count = likes.trim().split(" ").length;
+	console.log(count);
+	if (likes == "") count = 0;
+	document.getElementById(id + "+likes").innerHTML = count + " Likes";
+}
