@@ -42,9 +42,11 @@ function addUsers() {
 				data: data[key],
 			});
 		});
+		let friends=data[loggedInuser].friends.split(' ');
+		console.log(friends);
 		allUsers.innerHTML = "";
 		post.forEach((element) => {
-			if (element.data.username != loggedInuser) {
+			if (element.data.username != loggedInuser&&friends.includes(element.data.username)) {
 				let user = `<div id="person_card" onclick="viewMessages(${element.data.username})">
                 <a href="#" class="no-link" >
                     <div id="view-profile" >
