@@ -2,8 +2,11 @@
     --main-color: blue;
 }
 body {
-    background-color: rgb(221, 235, 252);
+    background-image: url(/Pngs/bg_img_2.jpg);
+    background-size: 100%;
+    overflow: hidden;
 }
+
 .font {
     font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
 
@@ -23,7 +26,7 @@ body {
     justify-content: center;
 }
 .card {
-    width: 20vw;
+    width: 25vw;
     background-color: rgb(203, 225, 252);
     border: .5px solid rgb(90, 90, 90);
     padding: 10px 10px 10px 0px;
@@ -100,9 +103,10 @@ body {
     padding: 6px 10px 6px 10px;
     margin-left: 15% ;
 }
-#bg_img1{
+#bg_img{
     width: 100%;
     height: 100%;
     overflow: hidden;
     position: absolute;
+    z-index: -1;
 }

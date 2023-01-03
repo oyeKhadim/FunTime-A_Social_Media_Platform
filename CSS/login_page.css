@@ -2,8 +2,9 @@
     --main-color: blue;
 }
 
-body {
-    background-color: rgb(221, 235, 252);
+body{
+    background-image: url(/Pngs/bg_img_1.jpg);
+    background-size: 100%;
 }
 
 .main {
@@ -30,7 +31,7 @@ body {
 }
 
 .card {
-    width: 20vw;
+    width: 25vw;
     background-color: rgb(203, 225, 252);
     border: .5px solid rgb(90, 90, 90);
     padding: 10px 10px 10px 0px;
@@ -92,11 +93,4 @@ body {
 
 .pass img {
     height: 30px;
-}
-
-#bg_img{
-    width: 100%;
-    height: 100%;
-    overflow: hidden;
-    position: absolute;
 }
