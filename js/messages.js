@@ -107,6 +107,9 @@ window.onload = async () => {
 	await get(child(ref(db), "loggedInuser/")).then((snapshot) => {
 		loggedInuser = snapshot.val().username;
 	});
+	update(ref(db, "Usernames/" + loggedInuser), {
+		messagesRead: true,
+	});
 	addUsers();
 	getAllMessages();
 };
@@ -174,6 +177,9 @@ async function storeMessageInDataBase(text) {
 	update(ref(db, "Usernames/" + username + "/Messages/" + loggedInuser), {
 		messages: yourMsgs,
 		read: false,
+	});
+	update(ref(db, "Usernames/" + username), {
+		messagesRead: false,
 	});
 }
 function storeInArray(text) {
