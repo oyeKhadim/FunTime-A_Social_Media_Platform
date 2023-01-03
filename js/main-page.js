@@ -43,10 +43,10 @@ import {
 } from "https://www.gstatic.com/firebasejs/9.15.0/firebase-database.js";
 const db = getDatabase();
 
-function SelectData() {
+async function SelectData() {
 	// console.log("Dp values Assigend" + username);
 	const dbref = ref(db);
-	get(child(dbref, "Usernames/" + username)).then((snapshot) => {
+	await get(child(dbref, "Usernames/" + username)).then((snapshot) => {
 		if (snapshot.exists()) {
 			imgurl = snapshot.val().imgurl;
 			document.getElementById("profile_pic").src = imgurl;
@@ -58,8 +58,8 @@ function storePostInDataBase() {
 	document.getElementById("posts_section").innerHTML = "";
 	let text = document.getElementById("caption-area");
 	let author = username;
-	let likes = 0;
-	let dislikes = 0;
+	let likes = "";
+	let dislikes = "";
 	let comments = "";
 	let date = new Date();
 	set(ref(db, "Posts/" + author + postCount), {
@@ -103,12 +103,12 @@ function addPosts() {
 				data: data[key],
 			});
 		});
-
+		console.log(post);
 		post.forEach(async (element) => {
 			let authorDp =
 					"https://uxwing.com/wp-content/themes/uxwing/download/peoples-avatars/no-profile-picture-icon.png",
 				authorName = "Unknown";
-			const dbref = ref(db);
+
 			const author = ref(db, "Usernames/" + element.data.author);
 			await new Promise((resolve) => {
 				onValue(author, (snapshot) => {
@@ -117,12 +117,15 @@ function addPosts() {
 					resolve();
 				});
 			});
-
+			let likes = element.data.likes.split(" ").length - 1;
+			if (likes < 0) likes = 0;
+			let dislikes = element.data.dislikes.split(" ").length - 1;
+			if (dislikes < 0) dislikes = 0;
 			let postImgurl = element.data.imgurl,
 				date = "06:37 AM , 2 Dec",
 				text = element.data.text,
-				noOfLikes = element.data.likes,
-				noOfDislikes = element.data.dislikes,
+				noOfLikes = likes,
+				noOfDislikes = dislikes,
 				noOfComments = element.data.comments,
 				id = element.name;
 			insertpost(
@@ -209,8 +212,8 @@ function imageUploaded(myfile) {
 	reader.readAsDataURL(file);
 }
 
+const dbref = ref(db);
 window.onload = async () => {
-	const dbref = ref(db);
 	const loggedinuser = ref(db, "loggedInuser/");
 	onValue(loggedinuser, (snapshot) => {
 		username = snapshot.val().username;
@@ -223,7 +226,7 @@ window.onload = async () => {
 	});
 	SelectData();
 
-	addPosts();
+	//addPosts();
 };
 let search_btn = document.getElementById("search_btn");
 let search_input = document.getElementById("search_input");
@@ -239,11 +242,16 @@ search_btn.onclick = () => {
 						email = snapshot.val().email,
 						bio = snapshot.val().bio,
 						friends = snapshot.val().friends,
+						friendRequests = snapshot.val().friendRequests,
 						status = friends.includes(username),
 						id = searchUsername;
 					let friendShipStatus = "Add Friend";
 					if (status == true) {
 						friendShipStatus = "You are Friends";
+					} else if (friendRequests.includes(username)) {
+						friendShipStatus = "Cancel Request";
+					} else if (searchUsername == username) {
+						friendShipStatus = "Its You";
 					}
 					showSearchedUser(
 						dp,
@@ -292,13 +300,59 @@ function showSearchedUser(
                             <h6>${bio}</h6>
                         </div>
                     </div>
-                    <div id="${id}" class="setting-card" style="text-align: center;">${friendShipStatus}</div>
+                    <div id="${id}" onclick="addFriend(${id})" class="setting-card" style="text-align: center;">${friendShipStatus}</div>
                 </div>`;
 
 	document.getElementById("extra-features").innerHTML = train;
-	
 }
-
+window.addFriend = async function addFriend(id) {
+	if (id.innerHTML == "Its You") return;
+	if (id.innerHTML == "Add Friend") {
+		console.log(id);
+		let friendUsername = id.id;
+		const friendRef = ref(db, "Usernames/" + friendUsername);
+		let friendRequests = "";
+		await new Promise((resolve, reject) => {
+			onValue(friendRef, (snapshot) => {
+				friendRequests = snapshot.val().friendRequests;
+				resolve();
+			});
+		});
+		if (friendRequests.includes(username)) {
+			alert("Request Already Exists");
+		} else {
+			if (friendRequests.length > 0) friendRequests += " ";
+			friendRequests += username;
+			console.log(friendRequests);
+			await update(child(dbref, "Usernames/" + friendUsername), {
+				friendRequests: friendRequests,
+			});
+		}
+		id.innerHTML = "Cancel Request";
+		return;
+	}
+	if (id.innerHTML == "Cancel Request") {
+		let friendUsername = id.id;
+		const friendRef = ref(db, "Usernames/" + friendUsername);
+		let friendRequests = "";
+		await new Promise((resolve, reject) => {
+			onValue(friendRef, (snapshot) => {
+				friendRequests = snapshot.val().friendRequests;
+				resolve();
+			});
+		});
+		//jugad it should be friendRequests= friendRequests.replace(username+" ", "");
+		//possible error : mateen and mateen123 can be  different useranmes
+		friendRequests = friendRequests.replace(username, "");
+		friendRequests = friendRequests.replace("  ", " ");
+		console.log(username + "  " + friendRequests);
+		await update(child(dbref, "Usernames/" + friendUsername), {
+			friendRequests: friendRequests,
+		});
+		id.innerHTML = "Add Friend";
+		return;
+	}
+};
 let view_friends = document.getElementById("view_friends");
 view_friends.onclick = () => {
 	let extraFeatures = document.getElementById("extra-features");
@@ -319,6 +373,9 @@ view_friends.onclick = () => {
 };
 let view_friends_requests = document.getElementById("friend-requests");
 view_friends_requests.onclick = () => {
+	viewFriendsRequests();
+};
+function viewFriendsRequests() {
 	let extraFeatures = document.getElementById("extra-features");
 	extraFeatures.innerHTML = `<h4 id="extra_header">Friend Requests</h4>`;
 	const friendRef = ref(db, "Usernames/" + username);
@@ -334,10 +391,14 @@ view_friends_requests.onclick = () => {
 	friendArr.forEach((element) => {
 		const friendRef2 = ref(db, "Usernames/" + element);
 		onValue(friendRef2, (snapshot) => {
-			ShowPersonCard(snapshot.val().imgurl, snapshot.val().fullName);
+			ShowPersonCard(
+				snapshot.val().imgurl,
+				snapshot.val().fullName,
+				snapshot.val().username
+			);
 		});
 	});
-};
+}
 let createPost_btn = document.getElementById("createPost_btn");
 // createPost_btn.addEventListener('click',show_newpost_popup())
 let cancle_btn = document.getElementById("cancle_btn");
@@ -402,18 +463,7 @@ function ShowFriendCard(dp, name) {
 	};
 }
 
-//		Friends Requests
-
-// let requests = document.getElementById("friend-requests");
-// requests.onclick = () => {
-// 	let extraFeatures = document.getElementById("extra-features");
-// 	extraFeatures.innerHTML = `<h4 id="extra_header">Friends Requests</h4>`;
-// 	let i = 0;
-// 	for (i = 0; i < 10; i++) {
-// 		ShowPersonCard();
-// 	}
-// };
-function ShowPersonCard(dp, name) {
+function ShowPersonCard(dp, name, username) {
 	let extraFeatures = document.getElementById("extra-features");
 	extraFeatures.innerHTML += `<div id="person_card"'>
 	<a href="#" class="no-link">
@@ -425,18 +475,88 @@ function ShowPersonCard(dp, name) {
 		</div>
 	</a>
 	<div id="add_friend" class="flex-row">
-		<div id="acceptRequest" class="setting-card" style="width: 50%;">Accept</div>
-		<div id="declineRequest"  style="width: 50%">Reject</div>
+		<div id="${username}" onclick="acceptRequest(${username})" class="setting-card" style="width: 50%;">Accept</div>
+		<div id="${username}"  onclick="rejectRequest(${username}) style="width: 50%">Reject</div>
 		
 	</div>
 </div>`;
 	// Added this so when user clicks on the profile of his friend it will show his profile
-	let get = document.getElementById("person_card");
-	get.onclick = () => {
-		showSearchedUser(dp, name, "n", "@", "cool", true, "id");
-		//Call function you call when someone search for Username    // i changed so you do not have to
-	};
+	// let get = document.getElementById("person_card");
+	// get.onclick = () => {
+	// 	showSearchedUser(dp, name, "n", "@", "cool", true, "id");
+	// 	Call function you call when someone search for Username    // i changed so you do not have to
+	// };
 }
+window.rejectRequest = async function (user) {
+		let requestedUsername = user[0].id;
+		console.log(requestedUsername);
+
+		let friendRef = ref(db, "Usernames/" + username);
+		let friendRequests = "";
+		await new Promise((resolve, reject) => {
+			onValue(friendRef, (snapshot) => {
+				friendRequests = snapshot.val().friendRequests;
+				resolve();
+			});
+		});
+		//jugad it should be friendRequests= friendRequests.replace(username+" ", "");
+		//possible error : mateen and mateen123 can be  different useranmes
+		friendRequests = friendRequests.replace(requestedUsername, "");
+		friendRequests = friendRequests.replace("  ", " ");
+		friendRequests = friendRequests.trim();
+		if (friends.length > 0) friends += " ";
+		friends += requestedUsername;
+		//console.log(username + "  " + friendRequests);
+		await update(child(dbref, "Usernames/" + username), {
+			friendRequests: friendRequests,
+		});
+
+};
+window.acceptRequest = async function (user) {
+	let requestedUsername = user[0].id;
+	console.log(requestedUsername);
+
+	let friendRef = ref(db, "Usernames/" + username);
+	let friendRequests = "",
+		friends = "";
+	await new Promise((resolve, reject) => {
+		onValue(friendRef, (snapshot) => {
+			friendRequests = snapshot.val().friendRequests;
+			friends = snapshot.val().friends;
+			resolve();
+		});
+	});
+	//jugad it should be friendRequests= friendRequests.replace(username+" ", "");
+	//possible error : mateen and mateen123 can be  different useranmes
+	friendRequests = friendRequests.replace(requestedUsername, "");
+	friendRequests = friendRequests.replace("  ", " ");
+	friendRequests = friendRequests.trim();
+	if (friends.length > 0) friends += " ";
+	friends += requestedUsername;
+	//console.log(username + "  " + friendRequests);
+	await update(child(dbref, "Usernames/" + username), {
+		friendRequests: friendRequests,
+		friends: friends,
+	});
+	//get friends of request and add in them
+	friends = "";
+	friendRef = ref(db, "Usernames/" + requestedUsername);
+	await new Promise((resolve, reject) => {
+		onValue(friendRef, (snapshot) => {
+			friends = snapshot.val().friends;
+			resolve();
+		});
+	});
+	if (friends.length > 0) friends += " ";
+	friends += username;
+	await update(child(dbref, "Usernames/" + requestedUsername), {
+		friends: friends,
+	});
+
+	//code
+	viewFriendsRequests();
+
+};
 //   onfriend card click
 // let personCard = document.getElementById('btnn');
 // personCard.onclick = () => {
@@ -501,7 +621,7 @@ function insertpost(dp, name, date, img, text, likes, dislikes, comments, id) {
         </div>
         <div class="reaction-section">
             <div class="reaction-section-details">
-                <p>${likes} Likes</p>
+                <p id="${id}+likes">${likes} Likes</p>
                 <p>${dislikes} Dislikes</p>
             </div>
             <div class="reaction-option">
@@ -516,18 +636,45 @@ function insertpost(dp, name, date, img, text, likes, dislikes, comments, id) {
             </div>
         </div>
     </ > `;
-	// Solve this error
 	document.getElementById("posts_section").innerHTML += train;
-	// let gt = document.getElementById(id);
-	// gt.addEventListener('click',ge());
-	// gt.onclick = (element) => {
-	// 	console.log("hiii");
-	// 	console.log(element)
-	// 	element.src = "/Pngs/heart-liked.png";
-	// };
 }
-window.likePost = function likePost(post) {
-	// console.log(post.src);
+window.likePost = async function likePost(post) {
+	console.log(post);
+	// let id = post.id;
+	// let posts = [];
+	// Object.keys(post).forEach((key) => {
+	// 	posts.push({
+	// 		name: key,
+	// 		post: post[key],
+	// 	});
+	// });
+	// console.log(posts);
+
+	// let likes = "12";
+	// console.log(id);
+	// await get(child(dbref, "Posts/" + id)).then((snapshot) => {
+	// 	if (snapshot.exists()) {
+	// 		likes = snapshot.val().likes;
+	// 	}else{
+	// 		likes="";
+	// 	}
+	// });
+	// console.log(likes);
+
+	// if (likes.includes(username)) {
+	// 	likes = likes.replace(username, "");
+	// 	post.src = "/Pngs/heart-unlike.png";
+	// } else {
+	// 	likes += username + " ";
+	// 	post.src = "/Pngs/heart-liked.png";
+	// }
+	// await update(child(dbref, "Posts/" + id), {
+	// 	likes: likes,
+	// });
+	// post=null;
+	// let count=likes.length;
+	// document.getElementById(id+"likes").innerHTML=count+" Likes";
+
 	if (post.src == "http://127.0.0.1:5501/Pngs/heart-liked.png") {
 		post.src = "/Pngs/heart-unlike.png";
 		return;
