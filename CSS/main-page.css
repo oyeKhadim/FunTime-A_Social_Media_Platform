@@ -175,7 +175,7 @@ body{
 }
 .declineRequest{
     cursor: pointer;
-
+    width: 50%;
     text-align: center;
     color: red;
     margin: 3px 5px;

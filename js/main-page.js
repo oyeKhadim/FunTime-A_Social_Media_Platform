@@ -59,8 +59,6 @@ async function SelectData() {
 }
 function newMessage() {
 	if (messageRead == false) {
-		console.log("Unread Messages");
-		//write code to make it visible like their are unviewed messages
 		document.getElementById('unread_msgs').classList+="color_red";
 	} else {
 		document.getElementById('unread_msgs').classList-="color_red";
@@ -515,7 +513,7 @@ function ShowPersonCard(dp, name, username) {
 	</a>
 	<div id="add_friend" class="flex-row">
 		<div id="${username}" onclick="acceptRequest(${username})" class="accept_request" style="width: 50%;">Accept</div>
-		<div id="${username}"  onclick="rejectRequest(${username})" class="declineRequest" style="width: 50%">Reject</div>
+		<div id="${username}"  onclick="rejectRequest(${username})" class="declineRequest" ">Reject</div>
 		
 	</div>
 </div>`;
