@@ -408,6 +408,10 @@ view_friends.onclick = () => {
 		});
 	});
 };
+let view_friends_requests_notifi = document.getElementById("friend_requests_noti");
+view_friends_requests_notifi.onclick = () => {
+	viewFriendsRequests();
+};
 let view_friends_requests = document.getElementById("friend-requests");
 view_friends_requests.onclick = () => {
 	viewFriendsRequests();
