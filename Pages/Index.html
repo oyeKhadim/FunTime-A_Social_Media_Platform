@@ -6,50 +6,9 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+    <link rel="stylesheet" href="/CSS/index.css">
     <style>
-        body {
-            margin: 0;
-            padding: 0;
-            background-image: url(/Pngs/bg_img_3.gif);
-        }
-
-        #top_bar {
-            padding: 5px;
-            height: 70px;
-            display: flex;
-            flex-direction: row-reverse;
-            background-color: rgb(186, 231, 249);
-            align-items: center;
-            transition: all .17s ease-in-out;
-        }
-
-        #top_bar:hover {
-            background-color: rgb(149, 225, 255);
-            border-bottom-left-radius: 15px;
-            border-bottom-right-radius: 15px;
-            padding: 10px 5px;
-        }
-
-        .btn {
-            cursor: pointer;
-            color: rgb(9, 0, 171);
-            font-size: 30px;
-            margin: 0 10px;
-            /* border: .3px solid rgb(0, 47, 255); */
-            align-items: center;
-            justify-content: center;
-            padding: 5px 10px;
-            transition: all .15s ease-in-out;
-        }
-
-        .btn:hover {
-            border: 1px solid white;
-            border-radius: 25px;
-            background-color: white;
-            scale: 110%;
-            padding: 8px 13px;
-            margin: 0 12px;
-        }
+        
     </style>
     <script src="/js/index.js"></script>
 </head>
@@ -57,6 +16,7 @@
 <body>
     <div id="main">
         <div id="top_bar">
+            <h1 id="header">FunTime</h1>
             <div onclick="signup_page()" id="signup" class="btn">Sign Up</div>
             <div onclick="login_page()" id="signin" class="btn">Sign In</div>
         </div>
