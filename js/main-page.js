@@ -1,10 +1,7 @@
 let username = "123",
 	postCount = 0,
-	fullName,
 	imgurl,
 	messageRead = true;
-let checkDataLoaded = false;
-//---------------------------------------Post picture Compressing----------------------------------------
 const MAX_WIDTH = 1280;
 const MAX_HEIGHT = 720;
 const MIME_TYPE = "image/jpeg";
@@ -39,7 +36,6 @@ import {
 	ref,
 	child,
 	update,
-	remove,
 	onValue,
 } from "https://www.gstatic.com/firebasejs/9.15.0/firebase-database.js";
 const db = getDatabase();
@@ -128,7 +124,6 @@ function addPosts() {
 			let authorDp =
 					"https://uxwing.com/wp-content/themes/uxwing/download/peoples-avatars/no-profile-picture-icon.png",
 				authorName = "Unknown";
-
 			const author = ref(db, "Usernames/" + element.data.author);
 			await new Promise((resolve) => {
 				onValue(author, (snapshot) => {
@@ -211,11 +206,9 @@ input.onchange = function (ev) {
 		document.getElementById("root").append(canvas);
 	};
 };
-
 function calculateSize(img, maxWidth, maxHeight) {
 	let width = img.width;
 	let height = img.height;
-
 	// calculate the width and height, constraining the proportions
 	if (width > height) {
 		if (width > maxWidth) {
@@ -233,15 +226,11 @@ function calculateSize(img, maxWidth, maxHeight) {
 // Utility functions for demo purpose
 //this funtion will be removed later
 let base64String = "";
-
 function imageUploaded(myfile) {
 	var file = myfile;
-
 	var reader = new FileReader();
-
 	reader.onload = function () {
 		base64String = reader.result.replace("data:", "").replace(/^.+,/, "");
-
 		post_imgurl = "data:image/png;base64," + base64String;
 	};
 	reader.readAsDataURL(file);
@@ -249,11 +238,6 @@ function imageUploaded(myfile) {
 
 const dbref = ref(db);
 window.onload = async () => {
-	// const loggedinuser = ref(db, "loggedInuser/");
-
-	// onValue(loggedinuser, (snapshot) => {
-	// 	username = snapshot.val().username;
-	// });
 	await get(child(dbref, "loggedInuser/")).then((snapshot) => {
 		if (snapshot.exists()) {
 			username = snapshot.val().username;
@@ -264,9 +248,7 @@ window.onload = async () => {
 			postCount = snapshot.val().postCount;
 		}
 	});
-
 	SelectData();
-
 	addPosts();
 };
 let search_btn = document.getElementById("search_btn");
@@ -343,7 +325,6 @@ function showSearchedUser(
                     </div>
                     <div id="${id}" onclick="addFriend(${id})" class="setting-card" style="text-align: center;">${friendShipStatus}</div>
                 </div>`;
-
 	document.getElementById("extra-features").innerHTML = train;
 }
 window.addFriend = async function addFriend(id) {
@@ -505,8 +486,8 @@ function ShowFriendCard(dp, name) {
 	// let get = document.getElementById("person_card");
 	// get.onclick = () => {
 	// 	showSearchedUser(dp, name, "n", "@", "cool", true, "id");
-	// 	//Call function you call when someone search for username
-	// 	// complete this by matching the user name with the data on db
+	// 	Call function you call when someone search for username
+	//  complete this by matching the user name with the data on db
 	// };
 }
 
@@ -527,12 +508,6 @@ function ShowPersonCard(dp, name, username) {
 		
 	</div>
 </div>`;
-	// Added this so when user clicks on the profile of his friend it will show his profile
-	// let get = document.getElementById("person_card");
-	// get.onclick = () => {
-	// 	showSearchedUser(dp, name, "n", "@", "cool", true, "id");
-	// 	Call function you call when someone search for Username    // i changed so you do not have to
-	// };
 }
 window.rejectRequest = async function (user) {
 	let requestedUsername = user[0].id;
@@ -603,33 +578,6 @@ window.acceptRequest = async function (user) {
 	//code
 	viewFriendsRequests();
 };
-//   onfriend card click
-// let personCard = document.getElementById('btnn');
-// personCard.onclick = () => {
-// 	let extraFeatures = document.getElementById('extra-features');
-// 	extraFeatures.innerHTML += `<div id="userProfile">
-// 	<img id="userBanner" src="/Pngs/banner.jpg" alt="">
-// 	<img id="userProfilePic" src="/Pngs/pic.jpg" alt="">
-// 	<h4 id="fullname"><b> Abdul Mateen</b></h4>
-// 	<div id="userDetails">
-// 		<div class="userCard">
-// 			<h6><b> Username :&nbsp&nbsp&nbsp&nbsp</b></h6>
-// 			<h6>abdulmateen</h6>
-// 		</div>
-// 		<hr>
-// 		<div class="userCard">
-// 			<h6><b> Email :&nbsp&nbsp&nbsp&nbsp</b></h6>
-// 			<h6>abdulmateen@mail.com</h6>
-// 		</div>
-// 		<hr>
-// 		<div class="userCard">
-// 			<h6><b> Bio :&nbsp&nbsp&nbsp&nbsp</b></h6>
-// 			<h6>COOL</h6>
-// 		</div>
-// 	</div>
-// 	<div id="friendshipInfo" class="setting-card" style="text-align: center;">Add Friend</div>
-// </div>`;
-// }
 
 //	notification
 
@@ -702,15 +650,6 @@ window.likePost = async function likePost(post) {
 		id = post[0].id;
 		post = post[0];
 	}
-	// let posts = [];
-	// Object.keys(post).forEach((key) => {
-	// 	posts.push({
-	// 		name: key,
-	// 		post: post[key],
-	// 	});
-	// });
-	// console.log(posts);
-
 	let likes = "12";
 	console.log(id);
 	let Ref = ref(db, "Posts/" + id);
@@ -731,7 +670,6 @@ window.likePost = async function likePost(post) {
 		post.src = "/Pngs/heart-liked.png";
 	}
 	updateLikes(likes, id);
-
 	// if (post.src == "http://127.0.0.1:5501/Pngs/heart-liked.png") {
 	// 	post.src = "/Pngs/heart-unlike.png";
 	// 	return;
