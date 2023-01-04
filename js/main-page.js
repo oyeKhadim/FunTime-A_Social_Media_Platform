@@ -71,10 +71,7 @@ function storePostInDataBase() {
 	let likes = "";
 	let dislikes = "";
 	let comments = "";
-
 	let date1 = new Date();
-
-	let d=date1.toDateString();
 	let hours = date1.getHours();
 	let min = date1.getMinutes();
 	let am = "AM";
