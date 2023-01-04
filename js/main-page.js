@@ -147,6 +147,7 @@ function addPosts() {
 			}
 			if (likes < 0) likes = 0;
 			let dislikes = 0;
+			// console.log(element.data)
 			if (element.data.dislikes.length > 0) {
 				dislikes = element.data.dislikes.trim().split(" ").length;
 			}
@@ -467,10 +468,10 @@ function clearPostDetails() {
 	document.getElementById("caption-area").value = "";
 	document.getElementById("img-input").value = null;
 }
-let loadPost_btn = document.getElementById("load_posts");
-loadPost_btn.onclick = () => {
-	addPosts();
-};
+// let loadPost_btn = document.getElementById("load_posts");
+// loadPost_btn.onclick = () => {
+// 	addPosts();
+// };
 
 //		Adding it to insert friend on btn click
 
@@ -551,7 +552,7 @@ window.rejectRequest = async function (user) {
 	});
 	viewFriendsRequests();
 
-};
+}
 window.acceptRequest = async function (user) {
 	let requestedUsername = user[0].id;
 	console.log(requestedUsername);
