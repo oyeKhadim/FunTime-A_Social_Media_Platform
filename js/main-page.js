@@ -59,9 +59,9 @@ async function SelectData() {
 }
 function newMessage() {
 	if (messageRead == false) {
-		document.getElementById('unread_msgs').classList+="color_red";
+		document.getElementById("unread_msgs").classList += "color_red";
 	} else {
-		document.getElementById('unread_msgs').classList-="color_red";
+		document.getElementById("unread_msgs").classList -= "color_red";
 	}
 }
 function storePostInDataBase() {
@@ -73,11 +73,17 @@ function storePostInDataBase() {
 	let comments = "";
 
 	let date1 = new Date();
-	let date = date1.toDateString();
-	// let day=date1.getDate();
-	// let month=date1.getMonth();
-	// let year=date1.getFullYear();
-	// let date= day+month+year
+
+	let d=date1.toDateString();
+	let hours = date1.getHours();
+	let min = date1.getMinutes();
+	let am = "AM";
+	if (hours > 12) {
+		hours = hours - 12;
+		am = "PM";
+	}
+	let date = `${hours}:${min} ${am} , ${date1.toDateString()}`;
+	console.log(date);
 	set(ref(db, "Posts/" + author + postCount), {
 		text: text.value,
 		imgurl: post_imgurl,
@@ -123,7 +129,7 @@ function addPosts() {
 		// console.log(post);
 		post.forEach(async (element) => {
 			let authorDp =
-				"https://uxwing.com/wp-content/themes/uxwing/download/peoples-avatars/no-profile-picture-icon.png",
+					"https://uxwing.com/wp-content/themes/uxwing/download/peoples-avatars/no-profile-picture-icon.png",
 				authorName = "Unknown";
 
 			const author = ref(db, "Usernames/" + element.data.author);
@@ -324,17 +330,17 @@ function showSearchedUser(
                     <h4 id="fullname"><b>${fullName}</b></h4>
                     <div id="userDetails">
                         <div class="userCard">
-                            <h6><b> Username : </b></h6>
+                            <h6><b> Username : &nbsp&nbsp</b></h6>
                             <h6>${username}</h6>
                         </div>
                         <hr>
                         <div class="userCard">
-                            <h6><b> Email :&nbsp&nbsp&nbsp&nbsp</b></h6>
+                            <h6><b> Email :&nbsp&nbsp</b></h6>
                             <h6>${email}</h6>
                         </div>
                         <hr>
                         <div class="userCard">
-                            <h6><b> Bio :&nbsp&nbsp&nbsp&nbsp</b></h6>
+                            <h6><b> Bio :&nbsp&nbsp</b></h6>
                             <h6>${bio}</h6>
                         </div>
                     </div>
@@ -409,7 +415,9 @@ view_friends.onclick = () => {
 		});
 	});
 };
-let view_friends_requests_notifi = document.getElementById("friend_requests_noti");
+let view_friends_requests_notifi = document.getElementById(
+	"friend_requests_noti"
+);
 view_friends_requests_notifi.onclick = () => {
 	viewFriendsRequests();
 };
@@ -497,12 +505,12 @@ function ShowFriendCard(dp, name) {
 	</a>
 </div>`;
 	// Added this so when user clicks on the profile of his friend it will show his profile
-	let get = document.getElementById("person_card");
-	get.onclick = () => {
-		showSearchedUser(dp, name, "n", "@", "cool", true, "id");
-		//Call function you call when someone search for username
-		// complete this by matching the user name with the data on db
-	};
+	// let get = document.getElementById("person_card");
+	// get.onclick = () => {
+	// 	showSearchedUser(dp, name, "n", "@", "cool", true, "id");
+	// 	//Call function you call when someone search for username
+	// 	// complete this by matching the user name with the data on db
+	// };
 }
 
 function ShowPersonCard(dp, name, username) {
@@ -551,8 +559,7 @@ window.rejectRequest = async function (user) {
 		friendRequests: friendRequests,
 	});
 	viewFriendsRequests();
-
-}
+};
 window.acceptRequest = async function (user) {
 	let requestedUsername = user[0].id;
 	console.log(requestedUsername);
@@ -744,4 +751,9 @@ function updateLikes(likes, id) {
 	console.log(count);
 	if (likes == "") count = 0;
 	document.getElementById(id + "+likes").innerHTML = count + " Likes";
+}
+let changeSetting = document.getElementById("change_setting");
+changeSetting.addEventListener("click", changeSettingClick);
+function changeSettingClick() {
+	window.location.href = "../Pages/setting.html?" + username;
 }
