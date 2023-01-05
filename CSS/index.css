@@ -3,7 +3,12 @@ body {
     padding: 0;
     background-image: url(/Pngs/bg_img_3.gif);
 }
-
+#marquee{
+    padding: 50px;
+    margin-top: 200px;
+    font-size: xx-large;
+    color: deeppink;
+}
 #top_bar {
     padding: 5px;
     height: 70px;
