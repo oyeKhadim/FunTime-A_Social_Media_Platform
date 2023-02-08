@@ -153,5 +153,5 @@ Soon I'll be merging all your changes into the main branch of this project. You 
 ## Authors
 
 * **Khadim Hussain** - *BackEnd Development* - [oyeKhadim](https://github.com/oyeKhadim)
-* **Abdul Mateen** - *FrontEnd Development* - [notrealMateen](https://github.com/notrealMateen)
+* **Abdul Mateen** - *FrontEnd Development* - [notrealmateen](https://github.com/notrealmateen)
 
